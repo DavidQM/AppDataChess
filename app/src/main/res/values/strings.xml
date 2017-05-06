@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">DataChess</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="repetircontraseña">Repetir Contraseña</string>
+    <string name="correo">Correo</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="cancelarr">Cancelar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="registro">Registro</string>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+        <item>ensayo</item>
+    </string-array>
+</resources>
