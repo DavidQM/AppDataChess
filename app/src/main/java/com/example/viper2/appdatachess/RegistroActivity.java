@@ -1,6 +1,7 @@
 package com.example.viper2.appdatachess;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +16,16 @@ public class RegistroActivity extends AppCompatActivity {
     String username, password, repPassword, correo;
     Intent intent;
 
+    SharedPreferences prefs;//nombre de las preferencias
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+
+        prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
+        editor = prefs.edit();//traemos el editor
 
         eRegusername = (EditText) findViewById(R.id.eRegusername);
         eRegusername = (EditText) findViewById(R.id.eRegusername);
