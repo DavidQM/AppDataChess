@@ -14,7 +14,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText eUsername,ePassword;
     Button bIniciar,bRegistrarse;
     String username="",password="",correo="";
-    Integer op=0,flag=0;
     Intent intent;//para abirir nuevas actividades
 
     SharedPreferences prefs;//nombre de las preferencias
