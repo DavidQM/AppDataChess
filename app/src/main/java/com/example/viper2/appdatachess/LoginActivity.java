@@ -94,4 +94,28 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
+
+    //metodos de override Ctrl + O (no es un cero)
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==1234 && resultCode == RESULT_OK){
+            username = data.getExtras().getString("username");
+            password = data.getExtras().getString("password");
+            correo = data.getExtras().getString("correo");
+
+            //datos a almacenar
+            editor.putString("nombre",username);//practica 5
+            editor.putString("pass",password);//practica 5
+            editor.putString("mail",correo);//practica 5
+            editor.commit();//olbligatorio para que se almacene la informacion
+
+
+        }
+        if (requestCode==1234 && resultCode == RESULT_CANCELED){
+            Toast.makeText(this, "Registro cancelado", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 }
