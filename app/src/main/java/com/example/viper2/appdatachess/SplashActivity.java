@@ -18,21 +18,25 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
         TimerTask task= new TimerTask() {
             @Override
+
             public void run() {
+
                 Intent i = new Intent().setClass(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
                 SplashActivity.this.finish();
-
-                Toast.makeText(getApplicationContext(), "Aqui va el intent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Aqui va el intent", Toast.LENGTH_SHORT).show();
             }
+
         };
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_DELAY);
+
     }
 
 }

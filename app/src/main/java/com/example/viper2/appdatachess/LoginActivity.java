@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent = new Intent (LoginActivity.this, RegistroActivity.class);
                 startActivityForResult(intent,1234);
             }
-        });
 
+        });
     }
 }
