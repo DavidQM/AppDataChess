@@ -7,6 +7,7 @@
     <string name="cancelarr">Cancelar</string>
     <string name="cancelar">Cancelar</string>
     <string name="username">Nombre de Usuario</string>
+    <string name="prueba">Prueba git</string>
     <string name="registro">Registro</string>
     <string name="ensayo">ensayo</string>
     <string-array name="planets_array">
