@@ -28,12 +28,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:src="@drawable/peon_min"/>
+           <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="username"
+               android:layout_margin="5dp"
+                android:id="@+id/eUsername"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:layout_margin="5dp"
+                android:id="@+id/ePassword"/>
             <GridLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alignmentMode="alignMargins"
                 android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:columnCount="2"
                 android:rowCount="1">
                 <Button
@@ -49,26 +66,14 @@
                     android:layout_height="wrap_content"
                     />
             </GridLayout>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="username"
-                android:id="@+id/eUsername"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="password"
-                android:inputType="textPassword"
-                android:id="@+id/ePassword"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Registrarse"
-                android:textSize="20dp"
-                android:id="@+id/bRegistrarse"/>
+                android:textSize="15dp"
+                android:layout_margin="5dp"
+                android:id="@+id/bRegistro"/>
         </GridLayout>
     </LinearLayout>
 

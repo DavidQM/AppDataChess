@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    EditText eRegusername, eRegcontraseña, eRegconfcontraseña, eCorreo;
-    Button bRegistrarse, bRegcancelar;
+    EditText eUsernamer, ePasswordr, eRepasswordr, eCorreor;
+    Button bRegistrarse,  bRegcancelar;
     String username, password, repPassword, correo;
     Intent intent;
 
@@ -27,10 +27,10 @@ public class RegistroActivity extends AppCompatActivity {
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
 
-        eRegusername = (EditText) findViewById(R.id.eRegusername);
-        eRegusername = (EditText) findViewById(R.id.eRegusername);
-        eRegcontraseña = (EditText) findViewById(R.id.eRegcontraseña);
-        eCorreo = (EditText) findViewById(R.id.eCorreo);
+        eUsernamer = (EditText) findViewById(R.id.eUsernamer);
+        ePasswordr= (EditText) findViewById(R.id.ePasswordr);
+        eRepasswordr = (EditText) findViewById(R.id.eRepasswordr);
+        eCorreor = (EditText) findViewById(R.id.eCorreor);
         bRegistrarse = (Button) findViewById(R.id.bRegistrarse);
         bRegcancelar = (Button) findViewById(R.id.bRegcancelar);
 
@@ -38,25 +38,27 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (eRegusername.getText().toString().equals("") || eRegcontraseña.getText().toString().equals("")|| eRegconfcontraseña.getText().toString().equals("")|| eCorreo.getText().toString().equals("")){
+                if (eUsernamer.getText().toString().equals("") || ePasswordr.getText().toString().equals("")|| eRepasswordr.getText().toString().equals("")|| eCorreor.getText().toString().equals("")){
                     // validar que todos los campos esten llenos
                     Toast.makeText(getApplicationContext(),"Aun hay campos sin llenar", Toast.LENGTH_SHORT).show();
                 }else {
-                    if(!eRegcontraseña.getText().toString().equals(eRegconfcontraseña.getText().toString())){
+                    if(!ePasswordr.getText().toString().equals(eRepasswordr.getText().toString())){
                         //validar que el password y repPassword sean iguales
                         Toast.makeText(getApplicationContext(),"Exite diferencia en las contraseñas", Toast.LENGTH_SHORT).show();
-                        ((EditText) findViewById(R.id.eRegcontraseña)).setText("");
-                        ((EditText) findViewById(R.id.eRegconfcontraseña)).setText("");
+                        ((EditText) findViewById(R.id.ePasswordr)).setText("");
+                        ((EditText) findViewById(R.id.eRepasswordr)).setText("");
                     }else{
-                        if(eCorreo.getText().toString().indexOf("@")<0){
+                        if(eCorreor.getText().toString().indexOf("@")<0){
                             //validar que el email
                             Toast.makeText(getApplicationContext(),"Email Erroneo", Toast.LENGTH_SHORT).show();
-                            ((EditText) findViewById(R.id.eCorreo)).setText("");
+                           ((EditText) findViewById(R.id.eCorreor)).setText("");
                         }else {
-                            username = eRegusername.getText().toString();
-                            password = eRegcontraseña.getText().toString();
-                            repPassword = eRegconfcontraseña.getText().toString();
-                            correo = eCorreo.getText().toString();
+                            //Toast.makeText(getApplicationContext(),"prueba", Toast.LENGTH_SHORT).show();
+
+                            username = eUsernamer.getText().toString();
+                            password = ePasswordr.getText().toString();
+                            repPassword = eRepasswordr.getText().toString();
+                            correo = eCorreor.getText().toString();
 
                             intent = new Intent();
                             intent.putExtra("username", username);
@@ -64,6 +66,7 @@ public class RegistroActivity extends AppCompatActivity {
                             intent.putExtra("correo", correo);
                             setResult(RESULT_OK, intent);
                             finish();
+
                         }
                     }
                 }
@@ -80,5 +83,5 @@ public class RegistroActivity extends AppCompatActivity {
         });
 
     }
-    }
+}
 
