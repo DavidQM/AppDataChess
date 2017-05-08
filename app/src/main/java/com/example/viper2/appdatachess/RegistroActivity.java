@@ -69,6 +69,8 @@ public class RegistroActivity extends AppCompatActivity {
 
                         }
                     }
+                    editor.putInt("login",-1);
+                    editor.commit();
                 }
             }
         });
