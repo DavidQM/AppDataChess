@@ -62,8 +62,10 @@
                     android:id="@+id/bIniciar"/>
                 <Spinner
                     android:id="@+id/spinner"
+                    style="@style/mySpinnerItemStyle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     />
             </GridLayout>
             <Button
@@ -71,8 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Registrarse"
-                android:textSize="15dp"
-                android:layout_margin="5dp"
+                android:textSize="10dp"
+                android:layout_margin="15dp"
                 android:id="@+id/bRegistro"/>
         </GridLayout>
     </LinearLayout>

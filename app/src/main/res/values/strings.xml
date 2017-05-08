@@ -9,16 +9,4 @@
     <string name="username">Nombre de Usuario</string>
     <string name="prueba">Prueba git</string>
     <string name="registro">Registro</string>
-    <string-array name="planets_array">
-
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-        <item>ensayo</item>
-    </string-array>
 </resources>

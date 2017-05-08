@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -15,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText eUsername,ePassword;
     Button bIniciar,bRegistro;
     String username="",password="",correo="";
+    Spinner sOpciones;
     Intent intent;//para abirir nuevas actividades
 
     SharedPreferences prefs;//nombre de las preferencias
@@ -24,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        /*
+
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
         //inicializamos
@@ -44,11 +49,17 @@ public class LoginActivity extends AppCompatActivity {
             setResult(RESULT_OK, intent);
             finish();
         }
-        */
+
         eUsername = (EditText) findViewById(R.id.eUsername);
         ePassword = (EditText) findViewById(R.id.ePassword);
         bIniciar = (Button) findViewById(R.id.bIniciar);
         bRegistro = (Button) findViewById(R.id.bRegistro);
+
+        sOpciones = (Spinner) findViewById(R.id.spinner);
+
+        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opciones, android.R.layout.simple_spinner_item);
+        sOpciones.setAdapter(adapter);
+
 
         bIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,10 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                     //Validar los datos digitados con los del registro
                     if (eUsername.getText().toString().equals(username) && ePassword.getText().toString().equals(password)){
                         Toast.makeText(getApplicationContext(), "Nombre de usuario o contraseña correctos", Toast.LENGTH_SHORT).show();
-                        /*
+
                         editor.putInt("login",1);//sobre escribimos con 1 (alguien ya esta loggeado)//practica 5
                         editor.commit();//practica 5
-                        */
+
                         intent = new Intent (LoginActivity.this, MainActivity.class);
                         intent.putExtra("username", username);
                         intent.putExtra("correo", correo);
@@ -100,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==1234 && resultCode == RESULT_OK){
-            /*
+
             username = data.getExtras().getString("username");
             password = data.getExtras().getString("password");
             correo = data.getExtras().getString("correo");
@@ -110,8 +121,8 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("pass",password);//practica 5
             editor.putString("mail",correo);//practica 5
             editor.commit();//olbligatorio para que se almacene la informacion
-            */
-            Toast.makeText(this, "Registro problema", Toast.LENGTH_SHORT).show();
+
+            //Toast.makeText(this, "Registro problema", Toast.LENGTH_SHORT).show();
 
         }
         if (requestCode==1234 && resultCode == RESULT_CANCELED){
