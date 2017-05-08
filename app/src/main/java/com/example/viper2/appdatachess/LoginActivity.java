@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putInt("login",1);//sobre escribimos con 1 (alguien ya esta loggeado)//practica 5
                         editor.commit();//practica 5
 
-                        intent = new Intent (LoginActivity.this, MainActivity.class);
+                        intent = new Intent (LoginActivity.this, MainActivityD.class);
                         intent.putExtra("username", username);
                         intent.putExtra("correo", correo);
                         startActivity(intent);

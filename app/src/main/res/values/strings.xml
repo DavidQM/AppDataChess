@@ -9,4 +9,10 @@
     <string name="username">Nombre de Usuario</string>
     <string name="prueba">Prueba git</string>
     <string name="registro">Registro</string>
+    <string name="title_activity_main_d">MainActivityD</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
