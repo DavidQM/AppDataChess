@@ -26,6 +26,10 @@
             android:name=".TablaActivityD"
             android:label="@string/title_activity_tabla_d"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ListActivityD"
+            android:label="@string/title_activity_list_d"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

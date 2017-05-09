@@ -27,4 +27,20 @@
         Sed ac sapien. Quisque interdum vehicula orci. Vivamus egestas accumsan felis.
         Mauris vitae nulla eu orci volutpat pulvinar.</string>
     <string name="title_activity_tabla_d">TablaActivityD</string>
+
+    <!--Array con los valores de la cabecera de la tabla-->
+    <string-array name="cabecera_tabla">
+        <item>Id de la fila</item>
+        <item>Nombre</item>
+        <item>Club</item>
+        <item>R1</item>
+        <item>R2</item>
+        <item>R3</item>
+    </string-array>
+    <string name="title_activity_list_d">ListActivityD</string>
+    <string-array name="cabecera_tabla_list">
+        <item>Nombre del jugador</item>
+        <item>Club</item>
+        <item>Elo</item>
+    </string-array>
 </resources>

@@ -14,9 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
-public class MainActivityD extends AppCompatActivity
+import java.util.ArrayList;
+
+public class ListActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Intent intent;
@@ -27,7 +30,7 @@ public class MainActivityD extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_d);
+        setContentView(R.layout.activity_list_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,6 +58,22 @@ public class MainActivityD extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ///empiza tabla
+
+        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
+        tabla.agregarCabecera(R.array.cabecera_tabla_list);
+        for(int i = 0; i < 16; i++)
+        {
+            ArrayList<String> elementos = new ArrayList<String>();
+            elementos.add(Integer.toString(i));
+            elementos.add("Casilla [" + i + ", 0]");
+            elementos.add("Casilla [" + i + ", 1]");
+           // elementos.add("Casilla [" + i + ", 2]");
+           // elementos.add("Casilla [" + i + ", 3]");
+           // elementos.add("Casilla [" + i + ", 4]");
+            tabla.agregarFilaTabla(elementos);
+        }
     }
 
     @Override
@@ -70,7 +89,7 @@ public class MainActivityD extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity_d, menu);
+        getMenuInflater().inflate(R.menu.list_activity_d, menu);
         return true;
     }
 
@@ -83,13 +102,14 @@ public class MainActivityD extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            intent = new Intent(MainActivityD.this, LoginActivity.class);
+            intent = new Intent(ListActivityD.this, LoginActivity.class);
             startActivity(intent);
             finish();
             editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
             editor.commit();//practica 5
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -99,9 +119,9 @@ public class MainActivityD extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        switch (item.getItemId()) {
+         switch (item.getItemId()) {
             case R.id.nav_main:
-                intent = new Intent (MainActivityD.this, MainActivityD.class);
+                intent = new Intent (ListActivityD.this, MainActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
@@ -117,14 +137,14 @@ public class MainActivityD extends AppCompatActivity
                 */
                 return true;
             case R.id.nav_table:
-                intent = new Intent (MainActivityD.this, TablaActivityD.class);
+                intent = new Intent (ListActivityD.this, TablaActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.nav_list:
-                intent = new Intent (MainActivityD.this, ListActivityD.class);
+                intent = new Intent (ListActivityD.this, ListActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
@@ -132,7 +152,7 @@ public class MainActivityD extends AppCompatActivity
                 return true;
             case R.id.nav_admin:
                 /*
-                intent = new Intent (MainActivityD.this, QhActivityD.class);
+                intent = new Intent (ListActivityD.this, QhActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
@@ -141,16 +161,15 @@ public class MainActivityD extends AppCompatActivity
                 return true;
             case R.id.nav_config:
                 /*
-                intent = new Intent (MainActivityD.this, PerfilActivityD.class);
+                intent = new Intent (ListActivityD.this, PerfilActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
                 */
                 return true;
-
             case R.id.nav_logout:
-                intent = new Intent (MainActivityD.this, LoginActivity.class);
+                intent = new Intent (ListActivityD.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Sección cerrada", Toast.LENGTH_SHORT).show();
                 finish();
@@ -163,7 +182,8 @@ public class MainActivityD extends AppCompatActivity
         /*
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        */
+       */
         //return true;
+
     }
 }

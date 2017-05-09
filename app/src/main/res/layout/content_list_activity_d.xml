@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.viper2.appdatachess.TablaActivityD"
-    tools:showIn="@layout/app_bar_tabla_activity_d">
+    tools:context="com.example.viper2.appdatachess.ListActivityD"
+    tools:showIn="@layout/app_bar_list_activity_d">
 
     <ScrollView
         android:id="@+id/scrollvertical"
@@ -26,12 +26,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TableLayout
-                    android:id="@+id/tabla"
+                    android:id="@+id/tabla_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TableLayout>
             </LinearLayout>
         </HorizontalScrollView>
 
-    </ScrollView>
-</android.support.constraint.ConstraintLayout>
+    </ScrollView></android.support.constraint.ConstraintLayout>
