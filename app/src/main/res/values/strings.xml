@@ -15,4 +15,15 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="relleno">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Sed ac elit. Cras tellus leo, sollicitudin a, sagittis eu, vulputate quis, arcu.
+        Proin at diam. Pellentesque sodales rhoncus purus. Donec dignissim libero in justo.
+        Nulla malesuada ultricies felis. Donec nec tellus eget massa semper dictum.
+        Pellentesque tincidunt. Sed justo massa, auctor non, venenatis id, molestie vitae, lectus.
+        Aenean ligula nibh, condimentum eget, condimentum eu, semper sed, sapien.
+        Suspendisse egestas ante a turpis. Vivamus vel est eget orci consequat hendrerit.
+        Nunc ac justo. Cras est quam, vestibulum at, vestibulum eget, cursus ac, nulla.
+        Nulla facilisis mauris et leo. Suspendisse eget odio non eros pellentesque mollis.
+        Sed ac sapien. Quisque interdum vehicula orci. Vivamus egestas accumsan felis.
+        Mauris vitae nulla eu orci volutpat pulvinar.</string>
 </resources>

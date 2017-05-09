@@ -1,5 +1,7 @@
 package com.example.viper2.appdatachess;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,12 +18,25 @@ import android.view.MenuItem;
 public class MainActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Intent intent;
+    SharedPreferences prefs;//nombre de las preferencias
+    SharedPreferences.Editor editor;
+    String username,correo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_d);
+
+        prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
+        editor = prefs.edit();//traemos el editor
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle box =getIntent().getExtras();
+        username = String.valueOf(box.getString("username"));
+        correo= String.valueOf(box.getString("correo"));
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +83,11 @@ public class MainActivityD extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            intent = new Intent(MainActivityD.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
+            editor.commit();//practica 5
             return true;
         }
 

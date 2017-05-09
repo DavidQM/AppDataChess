@@ -7,5 +7,32 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.viper2.appdatachess.MainActivityD"
     tools:showIn="@layout/app_bar_main_activity_d">
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alignmentMode="alignMargins"
+        android:columnCount="1"
+        android:rowCount="2">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aqui va la informacion del torneo"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/darkblue"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relleno"
+                android:textAlignment="center"
 
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </GridLayout>
 </android.support.constraint.ConstraintLayout>

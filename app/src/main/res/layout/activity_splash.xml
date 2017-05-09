@@ -7,11 +7,11 @@
     tools:context="com.example.viper2.appdatachess.SplashActivity">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="App desarrollada para el curso Programacion de dispositivos moviles - Ude@."
-            android:textAlignment="center"
-            android:textSize="30dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="App desarrollada para el curso Programacion de dispositivos moviles - Ude@."
+    android:textAlignment="center"
+    android:textSize="30dp"
+    android:textColor="@color/white"
+    android:textStyle="bold"/>
 </FrameLayout>

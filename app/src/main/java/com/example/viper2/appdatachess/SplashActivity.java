@@ -1,6 +1,7 @@
 package com.example.viper2.appdatachess;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
+
+
 
     private static  final long SPLASH_DELAY = 4000;
 
@@ -30,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent i = new Intent().setClass(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
                 SplashActivity.this.finish();
+
                 //Toast.makeText(getApplicationContext(), "Aqui va el intent", Toast.LENGTH_SHORT).show();
             }
 

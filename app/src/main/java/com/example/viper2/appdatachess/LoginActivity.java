@@ -42,13 +42,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if(prefs.getInt("login",-1)==1){//1 hay alguien loggeado -1 no hay nadie loggeado
-            intent = new Intent (LoginActivity.this, MainActivity.class);
+            intent = new Intent (LoginActivity.this, MainActivityD.class);
             intent.putExtra("username", username);
-           // intent.putExtra("correo", correo);
+           intent.putExtra("correo", correo);
             startActivity(intent);
             setResult(RESULT_OK, intent);
             finish();
         }
+
 
         eUsername = (EditText) findViewById(R.id.eUsername);
         ePassword = (EditText) findViewById(R.id.ePassword);
