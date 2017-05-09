@@ -21,6 +21,10 @@
         <activity
             android:name=".MainActivityD"
             android:label="@string/title_activity_main_d"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TablaActivityD"
+            android:label="@string/title_activity_tabla_d"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

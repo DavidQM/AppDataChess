@@ -15,7 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivityD extends AppCompatActivity
+public class TablaActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Intent intent;
@@ -26,7 +26,7 @@ public class MainActivityD extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_d);
+        setContentView(R.layout.activity_tabla_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,7 +69,7 @@ public class MainActivityD extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity_d, menu);
+        getMenuInflater().inflate(R.menu.tabla_activity_d, menu);
         return true;
     }
 
@@ -82,7 +82,7 @@ public class MainActivityD extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            intent = new Intent(MainActivityD.this, LoginActivity.class);
+            intent = new Intent(TablaActivityD.this, LoginActivity.class);
             startActivity(intent);
             finish();
             editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
