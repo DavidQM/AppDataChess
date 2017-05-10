@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/relleno"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
 
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
