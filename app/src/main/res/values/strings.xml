@@ -43,4 +43,6 @@
         <item>Club</item>
         <item>Elo</item>
     </string-array>
+    <string name="title_activity_game_d">GameActivityD</string>
+
 </resources>
