@@ -15,17 +15,40 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="relleno">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-        Sed ac elit. Cras tellus leo, sollicitudin a, sagittis eu, vulputate quis, arcu.
-        Proin at diam. Pellentesque sodales rhoncus purus. Donec dignissim libero in justo.
-        Nulla malesuada ultricies felis. Donec nec tellus eget massa semper dictum.
-        Pellentesque tincidunt. Sed justo massa, auctor non, venenatis id, molestie vitae, lectus.
-        Aenean ligula nibh, condimentum eget, condimentum eu, semper sed, sapien.
-        Suspendisse egestas ante a turpis. Vivamus vel est eget orci consequat hendrerit.
-        Nunc ac justo. Cras est quam, vestibulum at, vestibulum eget, cursus ac, nulla.
-        Nulla facilisis mauris et leo. Suspendisse eget odio non eros pellentesque mollis.
-        Sed ac sapien. Quisque interdum vehicula orci. Vivamus egestas accumsan felis.
-        Mauris vitae nulla eu orci volutpat pulvinar.</string>
+    <string name="relleno">REGLAMENTO\n
+        \n
+        Patrocina: Liga de Ajedrez de Antioquia - Jorge Aristizábal.\n
+        Organiza: Liga de Ajedrez de Antioquia.\n
+        Lugar: Parque del Ajedrez Unidad Deportiva Atanasio Girardot.\n
+        Fecha Inicio: jueves 18 de mayo 2017.\n
+        Inscripciones: Hasta el día 18 de mayo 6:00pm, para ser programados en la primera ronda.\n
+        Sistema de juego: Suizo a 13 rondas.\n
+        Sistema de pareos: Swiss Manager el Cual no será Objeto de Reclamo Salvo una mala Digitación que se debe reportar antes de la ronda siguiente para que tenga validez.\n
+        Tiempo de Juego: 3 minutos más 2 segundos de incremento por jugada.\n
+        Desempates: 1 Buchholz.\n
+        2 Progresivo.\n
+        3 Sonneborn Berger.\n
+        W.O: El tiempo de su reloj. Jugador que pierda por W y no avise será retirado del torneo.\n
+        Costo:  25.000 pesos Todos Pagan.\n
+        Cronograma: Inicio jueves 18 de mayo 6:30pm.\n
+        \n
+        PREMIACIÓN.
+        \n
+        General.\n
+        1. 50  porciento de la Inscripción para el continental + 100.000 \n
+        2. 50  porciento de la  Inscripción para el continental\n
+        \n
+        Elo menor a 2000.\n
+        1. 120.000 pesos \n
+        2. 80.000 pesos\n
+        \n
+        Elo menor a 1800.\n
+        1. 120.000 pesos \n
+        2. 80.000 pesos\n
+        \n
+        Mejor Sub 14.\n
+         80.000 pesos.</string>
+
     <string name="title_activity_tabla_d">TablaActivityD</string>
     <string name="tabla">Tabla</string>
 
@@ -44,4 +67,6 @@
         <item>Club</item>
         <item>Elo</item>
     </string-array>
+    <string name="title_activity_game_d">GameActivityD</string>
+
 </resources>
