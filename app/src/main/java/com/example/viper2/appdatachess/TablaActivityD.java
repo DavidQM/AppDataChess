@@ -85,7 +85,7 @@ public class TablaActivityD extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -100,9 +100,10 @@ public class TablaActivityD extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+       /*
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            intent = new Intent(TablaActivityD.this, LoginActivity.class);
+            intent = new Intent(ListActivityD.this, LoginActivity.class);
             startActivity(intent);
             finish();
             editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
@@ -110,9 +111,10 @@ public class TablaActivityD extends AppCompatActivity
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
     }
-
+    */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -171,7 +173,7 @@ public class TablaActivityD extends AppCompatActivity
             case R.id.nav_logout:
                 intent = new Intent (TablaActivityD.this, LoginActivity.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"Sección cerrada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
                 editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
                 editor.commit();//practica 5

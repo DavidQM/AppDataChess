@@ -85,7 +85,7 @@ public class ListActivityD extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+     /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -113,7 +113,7 @@ public class ListActivityD extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -128,13 +128,13 @@ public class ListActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_game:
-                /*
-                intent = new Intent (MainActivityD.this, GameActivityD.class);
+
+                intent = new Intent (ListActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
+
                 return true;
             case R.id.nav_table:
                 intent = new Intent (ListActivityD.this, TablaActivityD.class);
@@ -171,7 +171,7 @@ public class ListActivityD extends AppCompatActivity
             case R.id.nav_logout:
                 intent = new Intent (ListActivityD.this, LoginActivity.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"Sección cerrada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
                 editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
                 editor.commit();//practica 5
