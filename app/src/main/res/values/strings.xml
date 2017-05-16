@@ -68,5 +68,6 @@
         <item>Elo</item>
     </string-array>
     <string name="title_activity_game_d">GameActivityD</string>
+    <string name="title_activity_juez_d">JuezActivityD</string>
 
 </resources>
