@@ -3,9 +3,6 @@ package com.example.viper2.appdatachess;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,8 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.Toast;
-
 import java.util.ArrayList;
+
+//import java.security.cert.PKIXRevocationChecker;
 
 public class GameActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +24,7 @@ public class GameActivityD extends AppCompatActivity
     SharedPreferences prefs;//nombre de las preferencias
     SharedPreferences.Editor editor;
     String username,correo;
+    MenuItem Op1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class GameActivityD extends AppCompatActivity
         setContentView(R.layout.activity_game_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        /*
+
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
 
@@ -59,21 +58,26 @@ public class GameActivityD extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Op1.getTitle("Option1");
+        //Op1.toString("Option1");
+        //Op1.getActionProvider();
+        //int i=1;
+        //Op1.setTitle("Option1");
+        //onOptionsItemSelected(Op1);
+
         ///empiza tabla
 
         Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
-        tabla.agregarCabecera(R.array.cabecera_tabla_list);
-        for(int i = 0; i < 16; i++)
+        tabla.agregarCabecera(R.array.cabecera_game_list);
+        for(int i = 0; i < 12; i++)
         {
             ArrayList<String> elementos = new ArrayList<String>();
-            elementos.add(Integer.toString(i));
-            elementos.add("Casilla [" + i + ", 0]");
-            elementos.add("Casilla [" + i + ", 1]");
-            // elementos.add("Casilla [" + i + ", 2]");
-            // elementos.add("Casilla [" + i + ", 3]");
-            // elementos.add("Casilla [" + i + ", 4]");
+            elementos.add("R1 [" + i + ", 0]");
+            elementos.add("R1 [" + i + ", 1]");
+            elementos.add("Mesa" + tabla.getFilas());
             tabla.agregarFilaTabla(elementos);
         }
+
     }
 
     @Override
@@ -93,16 +97,13 @@ public class GameActivityD extends AppCompatActivity
 
         super.onCreateOptionsMenu(menu);
 
-        menu.add(0, 0, 0, "Option1").setShortcut('3', 'c');
-        menu.add(0, 1, 0, "Option2").setShortcut('3', 'c');
-        menu.add(0, 2, 0, "Option3").setShortcut('3', 'c');
-        menu.add(0, 3, 0, "Option4").setShortcut('3', 'c');
-        menu.add(0, 4, 0, "Option5").setShortcut('4', 's');
-       /*
-        SubMenu sMenu = menu.addSubMenu(0, 3, 0, "SubMenu"); //If you want to add submenu
-        sMenu.add(0, 4, 0, "SubOption1").setShortcut('5', 'z');
-        sMenu.add(0, 5, 0, "SubOption2").setShortcut('5', 'z');
-        */
+        menu.add(0, 0, 0, "Ronda 1").setShortcut('3', 'c');
+        menu.add(0, 1, 0, "Ronda 2").setShortcut('3', 'c');
+        menu.add(0, 2, 0, "Ronda 3").setShortcut('3', 'c');
+        menu.add(0, 3, 0, "Ronda 4").setShortcut('3', 'c');
+        menu.add(0, 4, 0, "Ronda 5").setShortcut('4', 's');
+
+
         return true;
     }
 
@@ -113,22 +114,80 @@ public class GameActivityD extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+       // Toast.makeText(getApplicationContext(),String.valueOf(item), Toast.LENGTH_SHORT).show();
+        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
+
+
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
             case 0:
                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                tabla.eliminarAllTabla();
+                tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < 12; i++)
+                {
+                    ArrayList<String> elementos = new ArrayList<String>();
+                    elementos.add("R1 [" + i + ", 0]");
+                    elementos.add("R1 [" + i + ", 1]");
+                    elementos.add("Mesa" + tabla.getFilas());
+                    tabla.agregarFilaTabla(elementos);
+                }
+                //tabla.eliminarAllTabla();
                 return true;
             case 1:
                 Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+                tabla.eliminarAllTabla();
+                tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < 12; i++)
+                {
+                    ArrayList<String> elementos = new ArrayList<String>();
+                    elementos.add("R2 [" + i + ", 0]");
+                    elementos.add("R2 [" + i + ", 1]");
+                    elementos.add("Mesa" + i);
+                    tabla.agregarFilaTabla(elementos);
+                }
+
                 return true;
             case 2:
                 Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+                tabla.eliminarAllTabla();
+                tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < 12; i++)
+                {
+                    ArrayList<String> elementos = new ArrayList<String>();
+                    elementos.add("R3 [" + i + ", 0]");
+                    elementos.add("R3 [" + i + ", 1]");
+                    elementos.add("Mesa" + i);
+                    tabla.agregarFilaTabla(elementos);
+                }
+
                 return true;
             case 3:
                 Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+                tabla.eliminarAllTabla();
+                tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < 12; i++)
+                {
+                    ArrayList<String> elementos = new ArrayList<String>();
+                    elementos.add("R4 [" + i + ", 0]");
+                    elementos.add("R4 [" + i + ", 1]");
+                    elementos.add("Mesa" + i);
+                    tabla.agregarFilaTabla(elementos);
+                }
+
                 return true;
             case 4:
                 Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
+                tabla.eliminarAllTabla();
+                tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < 12; i++)
+                {
+                    ArrayList<String> elementos = new ArrayList<String>();
+                    elementos.add("R5 [" + i + ", 0]");
+                    elementos.add("R5 [" + i + ", 1]");
+                    elementos.add("Mesa" + i);
+                    tabla.agregarFilaTabla(elementos);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -139,25 +198,72 @@ public class GameActivityD extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        /*
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        switch (item.getItemId()) {
+            case R.id.nav_main:
+                intent = new Intent (GameActivityD.this, MainActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.nav_game:
 
-        } else if (id == R.id.nav_slideshow) {
+                intent = new Intent (GameActivityD.this, GameActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
 
-        } else if (id == R.id.nav_manage) {
+                return true;
+            case R.id.nav_table:
+                intent = new Intent (GameActivityD.this, TablaActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.nav_list:
+                intent = new Intent (GameActivityD.this, ListActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.nav_admin:
+                /*
+                intent = new Intent (GameActivityD.this, QhActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                */
+                return true;
+            case R.id.nav_config:
+                /*
+                intent = new Intent (GameActivityD.this, PerfilActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                */
+                return true;
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            case R.id.nav_logout:
+                intent = new Intent (GameActivityD.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
+                finish();
+                editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
+                editor.commit();//practica 5
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
+        /*
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         */
-        return true;
+        //return true;
 
     }
 }

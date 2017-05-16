@@ -67,6 +67,12 @@
         <item>Club</item>
         <item>Elo</item>
     </string-array>
+    <string name="title_game_list_d">ListActivityD</string>
+    <string-array name="cabecera_game_list">
+        <item>Blancas</item>
+        <item>Negras</item>
+        <item>Mesa</item>
+    </string-array>
     <string name="title_activity_game_d">GameActivityD</string>
     <string name="title_activity_juez_d">JuezActivityD</string>
 
