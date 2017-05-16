@@ -1,11 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.viper2.appdatachess.JuezActivityD"
     tools:showIn="@layout/app_bar_juez_activity_d">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TORNEO ABIERTO BLITZ PRECONTINENTAL LIGA DE AJEDREZ DE ANTIOQUIA 2017"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textColor="@color/darkblue"
+        android:textStyle="bold"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+            <GridLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:alignmentMode="alignMargins"
+                android:columnCount="3"
+                android:rowCount="5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Mesa"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tMesa"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/Blancas"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tBlancas"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Negras"
+                    android:layout_margin="1dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tNegras"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Mesa1"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:id="@+id/tMesa1"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRb1"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRn1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Mesa2"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:id="@+id/tMesa2"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRb2"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRn2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Mesa3"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:id="@+id/tMesa3"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRb3"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRn3"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Mesa4"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:id="@+id/tMesa4"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRb4"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRn4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Mesa5"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:id="@+id/tMesa5"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRb5"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRn5"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Mesa6"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:id="@+id/tMesa6"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRb6"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Resultado"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:id="@+id/eRn6"/>
+
+            </GridLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Actualizar"
+        android:background="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/bActualizar"/>
+
+
+</LinearLayout>

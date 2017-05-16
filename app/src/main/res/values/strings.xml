@@ -75,5 +75,16 @@
     </string-array>
     <string name="title_activity_game_d">GameActivityD</string>
     <string name="title_activity_juez_d">JuezActivityD</string>
+    <string name="Mesa">MESA</string>
+    <string name="Blancas">BLANCAS</string>
+    <string name="Negras">NEGRAS</string>
+    <string name="Mesa1">Mesa 1</string>
+    <string name="Resultado">Resultado</string>
+    <string name="Mesa2">Mesa 2</string>
+    <string name="Mesa3">Mesa 3</string>
+    <string name="Mesa4">Mesa 4</string>
+    <string name="Mesa5">Mesa 5</string>
+    <string name="Mesa6">Mesa 6</string>
+    <string name="Actualizar">ACTUALIZAR</string>
 
 </resources>
