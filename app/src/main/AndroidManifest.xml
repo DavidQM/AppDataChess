@@ -35,6 +35,11 @@
             android:label="@string/title_activity_game_d"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".JuezActivityD"
+            android:label="@string/title_activity_juez_d"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

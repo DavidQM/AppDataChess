@@ -129,13 +129,13 @@ public class TablaActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_game:
-                /*
+
                 intent = new Intent (TablaActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
+
                 return true;
             case R.id.nav_table:
                 intent = new Intent (TablaActivityD.this, TablaActivityD.class);
@@ -151,14 +151,12 @@ public class TablaActivityD extends AppCompatActivity
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.nav_admin:
-                /*
-                intent = new Intent (TablaActivityD.this, QhActivityD.class);
+            case R.id.nav_juez:
+                intent = new Intent (TablaActivityD.this, JuezActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
                 return true;
             case R.id.nav_config:
                 /*

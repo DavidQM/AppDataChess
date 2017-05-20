@@ -128,14 +128,12 @@ public class JuezActivityD extends AppCompatActivity
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.nav_admin:
-                /*
-                intent = new Intent (MainActivityD.this, QhActivityD.class);
+            case R.id.nav_juez:
+                intent = new Intent (JuezActivityD.this, JuezActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
                 return true;
             case R.id.nav_config:
                 /*
@@ -148,7 +146,6 @@ public class JuezActivityD extends AppCompatActivity
                 return true;
 
             case R.id.nav_logout:
-
                 intent = new Intent (JuezActivityD.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
