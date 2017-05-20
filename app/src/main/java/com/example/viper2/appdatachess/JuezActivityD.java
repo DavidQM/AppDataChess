@@ -14,12 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import static com.example.viper2.appdatachess.R.string.correo;
+import static com.example.viper2.appdatachess.R.string.username;
 
-public class ListActivityD extends AppCompatActivity
+public class JuezActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Intent intent;
@@ -30,9 +30,18 @@ public class ListActivityD extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_d);
+        setContentView(R.layout.activity_juez_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
 
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
@@ -40,16 +49,7 @@ public class ListActivityD extends AppCompatActivity
         Bundle box =getIntent().getExtras();
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -58,22 +58,6 @@ public class ListActivityD extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        ///empiza tabla
-
-        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
-        tabla.agregarCabecera(R.array.cabecera_tabla_list);
-        for(int i = 0; i < 16; i++)
-        {
-            ArrayList<String> elementos = new ArrayList<String>();
-            elementos.add(Integer.toString(i));
-            elementos.add("Casilla [" + i + ", 0]");
-            elementos.add("Casilla [" + i + ", 1]");
-           // elementos.add("Casilla [" + i + ", 2]");
-           // elementos.add("Casilla [" + i + ", 3]");
-           // elementos.add("Casilla [" + i + ", 4]");
-            tabla.agregarFilaTabla(elementos);
-        }
     }
 
     @Override
@@ -85,11 +69,11 @@ public class ListActivityD extends AppCompatActivity
             super.onBackPressed();
         }
     }
-     /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.list_activity_d, menu);
+        getMenuInflater().inflate(R.menu.juez_activity_d, menu);
         return true;
     }
 
@@ -102,26 +86,20 @@ public class ListActivityD extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            intent = new Intent(ListActivityD.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-            editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
-            editor.commit();//practica 5
             return true;
         }
 
-
         return super.onOptionsItemSelected(item);
     }
-     */
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-         switch (item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.nav_main:
-                intent = new Intent (ListActivityD.this, MainActivityD.class);
+                Intent intent = new Intent(JuezActivityD.this, MainActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
@@ -129,7 +107,7 @@ public class ListActivityD extends AppCompatActivity
                 return true;
             case R.id.nav_game:
 
-                intent = new Intent (ListActivityD.this, GameActivityD.class);
+                intent = new Intent (JuezActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
@@ -137,14 +115,14 @@ public class ListActivityD extends AppCompatActivity
 
                 return true;
             case R.id.nav_table:
-                intent = new Intent (ListActivityD.this, TablaActivityD.class);
+                intent = new Intent (JuezActivityD.this, TablaActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.nav_list:
-                intent = new Intent (ListActivityD.this, ListActivityD.class);
+                intent = new Intent (JuezActivityD.this, ListActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
@@ -152,7 +130,7 @@ public class ListActivityD extends AppCompatActivity
                 return true;
             case R.id.nav_admin:
                 /*
-                intent = new Intent (ListActivityD.this, QhActivityD.class);
+                intent = new Intent (MainActivityD.this, QhActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
@@ -161,15 +139,17 @@ public class ListActivityD extends AppCompatActivity
                 return true;
             case R.id.nav_config:
                 /*
-                intent = new Intent (ListActivityD.this, PerfilActivityD.class);
+                intent = new Intent (MainActivityD.this, PerfilActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
                 */
                 return true;
+
             case R.id.nav_logout:
-                intent = new Intent (ListActivityD.this, LoginActivity.class);
+
+                intent = new Intent (JuezActivityD.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
@@ -180,10 +160,9 @@ public class ListActivityD extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
         /*
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-       */
-        //return true;
-
+        return true;*/
     }
 }

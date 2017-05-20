@@ -17,11 +17,11 @@
         <item
             android:id="@+id/nav_list"
             android:icon="@drawable/ic_menu_list"
-            android:title="ListActivity"/>
+            android:title="ListActivity" />
         <item
             android:id="@+id/nav_admin"
             android:icon="@drawable/ic_menu_admin"
-            android:title="AdminActivity"/>
+            android:title="JuezActivity" />
     </group>
 
     <item android:title="Communicate">

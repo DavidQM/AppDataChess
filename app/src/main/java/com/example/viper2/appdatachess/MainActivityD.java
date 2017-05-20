@@ -66,7 +66,7 @@ public class MainActivityD extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -81,9 +81,10 @@ public class MainActivityD extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            intent = new Intent(MainActivityD.this, LoginActivity.class);
+            intent = new Intent(ListActivityD.this, LoginActivity.class);
             startActivity(intent);
             finish();
             editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
@@ -91,9 +92,11 @@ public class MainActivityD extends AppCompatActivity
             return true;
         }
 
+
+
         return super.onOptionsItemSelected(item);
     }
-
+    */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -108,13 +111,13 @@ public class MainActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_game:
-                /*
+
                 intent = new Intent (MainActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
+
                 return true;
             case R.id.nav_table:
                 intent = new Intent (MainActivityD.this, TablaActivityD.class);
@@ -131,13 +134,13 @@ public class MainActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_admin:
-                /*
-                intent = new Intent (MainActivityD.this, QhActivityD.class);
+
+                intent = new Intent (MainActivityD.this,JuezActivityD .class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
+
                 return true;
             case R.id.nav_config:
                 /*
@@ -152,7 +155,7 @@ public class MainActivityD extends AppCompatActivity
             case R.id.nav_logout:
                 intent = new Intent (MainActivityD.this, LoginActivity.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"Sección cerrada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
                 editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
                 editor.commit();//practica 5
