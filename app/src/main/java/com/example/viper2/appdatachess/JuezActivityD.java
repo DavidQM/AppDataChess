@@ -1,5 +1,7 @@
 package com.example.viper2.appdatachess;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import static com.example.viper2.appdatachess.R.string.correo;
+import static com.example.viper2.appdatachess.R.string.username;
 
 public class JuezActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Intent intent;
+    SharedPreferences prefs;//nombre de las preferencias
+    SharedPreferences.Editor editor;
+    String username,correo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,13 @@ public class JuezActivityD extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });*/
+
+        prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
+        editor = prefs.edit();//traemos el editor
+
+        Bundle box =getIntent().getExtras();
+        username = String.valueOf(box.getString("username"));
+        correo= String.valueOf(box.getString("correo"));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,23 +97,72 @@ public class JuezActivityD extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.nav_main:
+                Intent intent = new Intent(JuezActivityD.this, MainActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.nav_game:
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+                intent = new Intent (JuezActivityD.this, GameActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
 
-        } else if (id == R.id.nav_slideshow) {
+                return true;
+            case R.id.nav_table:
+                intent = new Intent (JuezActivityD.this, TablaActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.nav_list:
+                intent = new Intent (JuezActivityD.this, ListActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.nav_admin:
+                /*
+                intent = new Intent (MainActivityD.this, QhActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                */
+                return true;
+            case R.id.nav_config:
+                /*
+                intent = new Intent (MainActivityD.this, PerfilActivityD.class);
+                intent.putExtra("username", username);
+                intent.putExtra("correo", correo);
+                startActivity(intent);
+                finish();
+                */
+                return true;
 
-        } else if (id == R.id.nav_manage) {
+            case R.id.nav_logout:
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+                intent = new Intent (JuezActivityD.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
+                finish();
+                editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
+                editor.commit();//practica 5
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+        /*
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return true;*/
     }
 }
