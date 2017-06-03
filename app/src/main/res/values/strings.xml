@@ -51,7 +51,6 @@
 
     <string name="title_activity_tabla_d">TablaActivityD</string>
     <string name="tabla">Tabla</string>
-
     <!--Array con los valores de la cabecera de la tabla-->
     <string-array name="cabecera_tabla">
         <item>Id de la fila</item>
