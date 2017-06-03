@@ -150,15 +150,13 @@ public class ListActivityD extends AppCompatActivity
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.nav_admin:
-                /*
-                intent = new Intent (ListActivityD.this, QhActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
-                startActivity(intent);
-                finish();
-                */
-                return true;
+             case R.id.nav_juez:
+                 intent = new Intent (ListActivityD.this, JuezActivityD.class);
+                 intent.putExtra("username", username);
+                 intent.putExtra("correo", correo);
+                 startActivity(intent);
+                 finish();
+                 return true;
             case R.id.nav_config:
                 /*
                 intent = new Intent (ListActivityD.this, PerfilActivityD.class);

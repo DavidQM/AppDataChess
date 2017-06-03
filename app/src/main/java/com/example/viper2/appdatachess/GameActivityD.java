@@ -229,14 +229,12 @@ public class GameActivityD extends AppCompatActivity
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.nav_admin:
-
+            case R.id.nav_juez:
                 intent = new Intent (GameActivityD.this, JuezActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-
                 return true;
             case R.id.nav_config:
                 /*

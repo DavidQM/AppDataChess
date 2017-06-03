@@ -19,7 +19,7 @@
             android:icon="@drawable/ic_menu_list"
             android:title="ListActivity" />
         <item
-            android:id="@+id/nav_admin"
+            android:id="@+id/nav_juez"
             android:icon="@drawable/ic_menu_admin"
             android:title="JuezActivity" />
     </group>
