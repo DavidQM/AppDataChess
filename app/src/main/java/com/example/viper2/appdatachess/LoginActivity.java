@@ -18,9 +18,10 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText eUsername,ePassword;
     Button bIniciar,bRegistro;
-    String username="",password="",correo="";
+    String username="",password="",correo="",usuario;
     Spinner sOpciones;
     Intent intent;//para abirir nuevas actividades
+
 
     SharedPreferences prefs;//nombre de las preferencias
     SharedPreferences.Editor editor;
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         if(prefs.getInt("login",-1)==1){//1 hay alguien loggeado -1 no hay nadie loggeado
             intent = new Intent (LoginActivity.this, MainActivityD.class);
             intent.putExtra("username", username);
-           intent.putExtra("correo", correo);
+            intent.putExtra("correo", correo);
             startActivity(intent);
             setResult(RESULT_OK, intent);
             finish();
@@ -60,6 +61,29 @@ public class LoginActivity extends AppCompatActivity {
 
         ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opciones, android.R.layout.simple_spinner_item);
         sOpciones.setAdapter(adapter);
+
+        sOpciones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+
+                if (i==0){
+                    usuario ="uno";
+                    Toast.makeText(getApplicationContext(), "Eres jugador", Toast.LENGTH_SHORT).show();
+                }if(i==1){
+                    usuario ="dos";
+                    Toast.makeText(getApplicationContext(), "Eres espectador", Toast.LENGTH_SHORT).show();
+                }if(i==2){
+                    usuario ="tres";
+                    Toast.makeText(getApplicationContext(), "Eres juez", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         bIniciar.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent = new Intent (LoginActivity.this, MainActivityD.class);
                         intent.putExtra("username", username);
                         intent.putExtra("correo", correo);
+                        intent.putExtra("usuario", usuario);
                         startActivity(intent);
                         setResult(RESULT_OK, intent);
                         finish();

@@ -22,7 +22,8 @@ public class MainActivityD extends AppCompatActivity
     Intent intent;
     SharedPreferences prefs;//nombre de las preferencias
     SharedPreferences.Editor editor;
-    String username,correo;
+    String username,correo,usuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class MainActivityD extends AppCompatActivity
         Bundle box =getIntent().getExtras();
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
+        usuario= String.valueOf(box.getString("usuario"));
+
+
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +108,7 @@ public class MainActivityD extends AppCompatActivity
         int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.nav_main:
+                //Toast.makeText(getApplicationContext(), usuario, Toast.LENGTH_SHORT).show();
                 intent = new Intent (MainActivityD.this, MainActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
@@ -111,34 +116,44 @@ public class MainActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_game:
-
                 intent = new Intent (MainActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-
                 return true;
             case R.id.nav_table:
-                intent = new Intent (MainActivityD.this, TablaActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
-                startActivity(intent);
-                finish();
+                if (usuario=="tres"){
+                    Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
+                }else {
+                    intent = new Intent(MainActivityD.this, TablaActivityD.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("correo", correo);
+                    startActivity(intent);
+                    finish();
+                }
                 return true;
             case R.id.nav_list:
-                intent = new Intent (MainActivityD.this, ListActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
-                startActivity(intent);
-                finish();
+                if (usuario=="uno") {
+                    intent = new Intent(MainActivityD.this, ListActivityD.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("correo", correo);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.nav_juez:
-                intent = new Intent (MainActivityD.this, JuezActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
-                startActivity(intent);
-                finish();
+                if (usuario=="tres") {
+                    intent = new Intent(MainActivityD.this, JuezActivityD.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("correo", correo);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.nav_config:
                 /*
