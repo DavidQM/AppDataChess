@@ -176,6 +176,7 @@ public class MainActivityD extends AppCompatActivity
                 intent = new Intent (MainActivityD.this, MainActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
+                intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
                 return true;
@@ -183,6 +184,7 @@ public class MainActivityD extends AppCompatActivity
                 intent = new Intent (MainActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
+                intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
                 return true;
@@ -193,6 +195,7 @@ public class MainActivityD extends AppCompatActivity
                     intent = new Intent(MainActivityD.this, TablaActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }
@@ -202,6 +205,7 @@ public class MainActivityD extends AppCompatActivity
                     intent = new Intent(MainActivityD.this, ListActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }else{
@@ -213,6 +217,7 @@ public class MainActivityD extends AppCompatActivity
                     intent = new Intent(MainActivityD.this, JuezActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }else{

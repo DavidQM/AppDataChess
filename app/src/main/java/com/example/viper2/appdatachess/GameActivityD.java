@@ -204,6 +204,7 @@ public class GameActivityD extends AppCompatActivity
                 intent = new Intent (GameActivityD.this, MainActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
+                intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
                 return true;
@@ -212,6 +213,7 @@ public class GameActivityD extends AppCompatActivity
                 intent = new Intent (GameActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
+                intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
 
@@ -223,6 +225,7 @@ public class GameActivityD extends AppCompatActivity
                     intent = new Intent(GameActivityD.this, TablaActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }
@@ -232,6 +235,7 @@ public class GameActivityD extends AppCompatActivity
                     intent = new Intent(GameActivityD.this, ListActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }else{
@@ -243,6 +247,7 @@ public class GameActivityD extends AppCompatActivity
                     intent = new Intent(GameActivityD.this, JuezActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }else{
