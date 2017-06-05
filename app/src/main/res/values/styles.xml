@@ -10,7 +10,7 @@
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
         <item name="android:textColor">@color/my_spinner_text_color</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

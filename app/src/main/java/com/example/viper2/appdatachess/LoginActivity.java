@@ -14,6 +14,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText eUsername,ePassword;
@@ -58,8 +61,11 @@ public class LoginActivity extends AppCompatActivity {
 
         sOpciones = (Spinner) findViewById(R.id.spinner);
 
-        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opciones, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,R.array.opciones);
+        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opciones, R.layout.spinner_item);
         sOpciones.setAdapter(adapter);
+
+
 
 
         bIniciar.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +90,9 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         setResult(RESULT_OK, intent);
                         finish();
+
+                        String text = sOpciones.getSelectedItem().toString();
+                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 
 
                     }else{
@@ -122,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("pass",password);//practica 5
             editor.putString("mail",correo);//practica 5
             editor.commit();//olbligatorio para que se almacene la informacion
+
 
             //Toast.makeText(this, "Registro problema", Toast.LENGTH_SHORT).show();
 

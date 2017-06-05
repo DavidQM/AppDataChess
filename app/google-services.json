@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "546234242380",
+    "firebase_url": "https://appdatachess.firebaseio.com",
+    "project_id": "appdatachess",
+    "storage_bucket": "appdatachess.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546234242380:android:e68e0e9170f602c8",
+        "android_client_info": {
+          "package_name": "com.example.viper2.appdatachess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546234242380-rovps9014h7ml2ugav9097nqfubb07ql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.viper2.appdatachess",
+            "certificate_hash": "2ca7297fbcbdaba497878dad545d9726b3b07841"
+          }
+        },
+        {
+          "client_id": "546234242380-brrnse5d9a11l1fbv6usvhv42f67vgdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjpmqGfsbjuEdd1CVeG_PsQN8227BiS5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546234242380-brrnse5d9a11l1fbv6usvhv42f67vgdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
