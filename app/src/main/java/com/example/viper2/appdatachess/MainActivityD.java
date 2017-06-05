@@ -88,7 +88,7 @@ public class MainActivityD extends AppCompatActivity
                 //    lista.add(userSnapshot.getValue(Contacto.class));}
                 Toast.makeText(getApplicationContext(), "Data", Toast.LENGTH_SHORT).show();
                 if (dataSnapshot.child(String.valueOf(4)).exists()){
-                    String usera = dataSnapshot.getValue(String.class);
+                    //String usera = dataSnapshot.getValue(String.class);
                     //eNombre.setText(contacto.getNombre());
                     //eTelefono.setText(contacto.getTelefono());
                     //eCorreo.setText(contacto.getCorreo());
