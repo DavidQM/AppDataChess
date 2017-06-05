@@ -6,8 +6,10 @@ package com.example.viper2.appdatachess;
 public class FData{
     String id,nombre,correo,contraseña,club,elo;
 
+    public FData() {
+    }
 
-    public FData(String id, String nombre,String correo,String contraseña,String club, String elo) {
+    public FData(String id, String nombre, String correo, String contraseña, String club, String elo) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;

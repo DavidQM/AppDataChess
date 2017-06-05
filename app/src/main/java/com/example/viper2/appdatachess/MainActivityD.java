@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 
 
 public class MainActivityD extends AppCompatActivity
@@ -34,7 +36,7 @@ public class MainActivityD extends AppCompatActivity
     SharedPreferences.Editor editor;
     String username,correo,usuario,TAG;
 
-    DatabaseReference myRef;
+    DatabaseReference myRef,pRef;
     FData user;
 
     @Override
@@ -59,54 +61,50 @@ public class MainActivityD extends AppCompatActivity
          myRef = database.getReference("Participante").child(String.valueOf(4));
          myRef.setValue(user);
          */
-
-        // Read from the database
-         /*
-         myRef.addValueEventListener(new ValueEventListener() {
-             @Override
-             public void onDataChange(DataSnapshot dataSnapshot) {
-                 // This method is called once with the initial value and again
-                 // whenever data at this location is updated.
-                 String value = dataSnapshot.getValue(String.class);
-                 //Log.d(TAG, "Value is: "   value);
-             }
-
-             @Override
-             public void onCancelled(DatabaseError error) {
-                 // Failed to read value
-                 //Log.w(TAG, "Failed to read value.", error.toException());
-             }
-         });
-         */
-        //myRef = database.getReference("Participante").child(String.valueOf(4));
-        myRef = database.getReference("Participante");
-        myRef.addValueEventListener(new ValueEventListener() {
+        /*
+        // pruba funcional 05 -06-2017
+        pRef= database.getReference("Participante");
+        pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //ArrayList<Contacto> lista = new ArrayList<Contacto>();
-                //  for (DataSnapshot userSnapshot: dataSnapshot.getChildren()){
-                //    lista.add(userSnapshot.getValue(Contacto.class));}
-                Toast.makeText(getApplicationContext(), "Data", Toast.LENGTH_SHORT).show();
-                if (dataSnapshot.child(String.valueOf(4)).exists()){
-                    //String usera = dataSnapshot.getValue(String.class);
-                    //eNombre.setText(contacto.getNombre());
-                    //eTelefono.setText(contacto.getTelefono());
-                    //eCorreo.setText(contacto.getCorreo());
-                    //String nom = user.getNombre();
-                    //Toast.makeText(getApplicationContext(),nom, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), user.getCorreo(), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), user.getElo(), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), user.getClub(), Toast.LENGTH_SHORT).show();
-                }
-
+                FData usera = dataSnapshot.getValue(FData.class);
+                Log.i("Prueba",dataSnapshot.toString());
             }
 
+            @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        */
+        pRef= database.getReference("Participante");
+       // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
+        pRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<FData> lista = new ArrayList<FData>();
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    lista.add(userSnapshot.getValue(FData.class));
+                }
+                if (dataSnapshot.child(String.valueOf(4)).exists()){
+                    FData usera = dataSnapshot.child(String.valueOf(4)).getValue(FData.class);
+                    Log.i("Prueba",dataSnapshot.toString());
+
+                    Toast.makeText(getApplicationContext(),usera.getNombre(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), usera.getCorreo(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), usera.getElo(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), usera.getClub(), Toast.LENGTH_SHORT).show();
+                }
+                /*
+
+               */
             }
 
-        });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
