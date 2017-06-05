@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,21 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 public class MainActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    DatabaseReference myRef;
-    FData user;
     Intent intent;
     SharedPreferences prefs;//nombre de las preferencias
     SharedPreferences.Editor editor;
-    String username,correo, TAG;
+    String username,correo,usuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,62 +38,8 @@ public class MainActivityD extends AppCompatActivity
         Bundle box =getIntent().getExtras();
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
+        usuario= String.valueOf(box.getString("usuario"));
 
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        /*
-        user = new FData(String.valueOf(4),"nombre","asdas@asda","abc123","Marinillos","12323");
-        myRef = database.getReference("Participante").child(String.valueOf(4));
-        myRef.setValue(user);
-        */
-
-        // Read from the database
-        /*
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                //Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-        */
-        //myRef = database.getReference("Participante").child(String.valueOf(4));
-        myRef = database.getReference("Participante");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //ArrayList<Contacto> lista = new ArrayList<Contacto>();
-                //  for (DataSnapshot userSnapshot: dataSnapshot.getChildren()){
-               //    lista.add(userSnapshot.getValue(Contacto.class));}
-                Toast.makeText(getApplicationContext(), "Data", Toast.LENGTH_SHORT).show();
-                  if (dataSnapshot.child(String.valueOf(4)).exists()){
-                    String usera = dataSnapshot.getValue(String.class);
-                    //eNombre.setText(contacto.getNombre());
-                    //eTelefono.setText(contacto.getTelefono());
-                    //eCorreo.setText(contacto.getCorreo());
-                    //String nom = user.getNombre();
-                    //Toast.makeText(getApplicationContext(),nom, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), user.getCorreo(), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), user.getElo(), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), user.getClub(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            public void onCancelled(DatabaseError databaseError) {
-            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-            }
-
-        });
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -170,6 +108,7 @@ public class MainActivityD extends AppCompatActivity
         int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.nav_main:
+                //Toast.makeText(getApplicationContext(), usuario, Toast.LENGTH_SHORT).show();
                 intent = new Intent (MainActivityD.this, MainActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
@@ -177,34 +116,44 @@ public class MainActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_game:
-
                 intent = new Intent (MainActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-
                 return true;
             case R.id.nav_table:
-                intent = new Intent (MainActivityD.this, TablaActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
-                startActivity(intent);
-                finish();
+                if (usuario=="tres"){
+                    Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
+                }else {
+                    intent = new Intent(MainActivityD.this, TablaActivityD.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("correo", correo);
+                    startActivity(intent);
+                    finish();
+                }
                 return true;
             case R.id.nav_list:
-                intent = new Intent (MainActivityD.this, ListActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
-                startActivity(intent);
-                finish();
+                if (usuario=="uno") {
+                    intent = new Intent(MainActivityD.this, ListActivityD.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("correo", correo);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.nav_juez:
-                intent = new Intent (MainActivityD.this, JuezActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
-                startActivity(intent);
-                finish();
+                if (usuario=="tres") {
+                    intent = new Intent(MainActivityD.this, JuezActivityD.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("correo", correo);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.nav_config:
                 /*
