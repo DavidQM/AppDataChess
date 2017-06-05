@@ -125,6 +125,7 @@ public class ListActivityD extends AppCompatActivity
                 intent = new Intent (ListActivityD.this, MainActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
+                intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
                 return true;
@@ -133,6 +134,7 @@ public class ListActivityD extends AppCompatActivity
                 intent = new Intent (ListActivityD.this, GameActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
+                intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
 
@@ -144,6 +146,7 @@ public class ListActivityD extends AppCompatActivity
                     intent = new Intent(ListActivityD.this, TablaActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }
@@ -153,6 +156,7 @@ public class ListActivityD extends AppCompatActivity
                     intent = new Intent(ListActivityD.this, ListActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
+                    intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
                 }else{
@@ -164,6 +168,7 @@ public class ListActivityD extends AppCompatActivity
                      intent = new Intent(ListActivityD.this, JuezActivityD.class);
                      intent.putExtra("username", username);
                      intent.putExtra("correo", correo);
+                     intent.putExtra("usuario", usuario);
                      startActivity(intent);
                      finish();
                  }else{
