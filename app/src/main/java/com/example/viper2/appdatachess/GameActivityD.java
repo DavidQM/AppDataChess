@@ -9,10 +9,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 //import java.security.cert.PKIXRevocationChecker;
@@ -25,6 +33,10 @@ public class GameActivityD extends AppCompatActivity
     SharedPreferences.Editor editor;
     String username,correo,usuario;
     MenuItem Op1;
+
+    //firebase
+    DatabaseReference myRef,rRef;
+    FData user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +52,26 @@ public class GameActivityD extends AppCompatActivity
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        //firebase gameactivity
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        rRef= database.getReference("Torneo").child("Rondas");//.child(String.valueOf(1));
+        rRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<String> lista = new ArrayList<String>();
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                   lista.add(userSnapshot.getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
-        */
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,7 +88,7 @@ public class GameActivityD extends AppCompatActivity
         //Op1.setTitle("Option1");
         //onOptionsItemSelected(Op1);
 
-        ///empiza tabla
+        ///empieza tabla
 
         Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
         tabla.agregarCabecera(R.array.cabecera_game_list);
@@ -102,7 +124,8 @@ public class GameActivityD extends AppCompatActivity
         menu.add(0, 1, 0, "Ronda 2").setShortcut('3', 'c');
         menu.add(0, 2, 0, "Ronda 3").setShortcut('3', 'c');
         menu.add(0, 3, 0, "Ronda 4").setShortcut('3', 'c');
-        menu.add(0, 4, 0, "Ronda 5").setShortcut('4', 's');
+        menu.add(0, 3, 0, "Ronda 5").setShortcut('3', 'c');
+        menu.add(0, 4, 0, "Ronda 6").setShortcut('4', 's');
 
 
         return true;
@@ -114,83 +137,136 @@ public class GameActivityD extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        int cont=6;
 
        // Toast.makeText(getApplicationContext(),String.valueOf(item), Toast.LENGTH_SHORT).show();
         Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
+        tabla.eliminarAllTabla();
+        tabla.agregarCabecera(R.array.cabecera_game_list);
+        ArrayList<String> elementos = new ArrayList<String>();
 
 
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
             case 0:
                 Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
+               // tabla.eliminarAllTabla();
+               // tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < cont; i++)
                 {
-                    ArrayList<String> elementos = new ArrayList<String>();
+                    rRef.child(String.valueOf(item.getItemId()+1)).child(getResources().getStringArray(R.array.mesas_array)[i]).addValueEventListener(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            ArrayList<String> lista = new ArrayList<String>();
+                            for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                                lista.add(userSnapshot.getValue(String.class));
+                            }
+                             Log.i("Prueba",dataSnapshot.toString());
+                             Log.i("0 = ",lista.get(0).toString());
+                            Log.i("1 = ",lista.get(1).toString());
+                            Log.i("2 = ",lista.get(2).toString());
+                            Log.i("3 = ",lista.get(3).toString());
+                            lista.clear();
+                            //Toast.makeText(getApplicationContext(), lista.get(0).toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), lista.get(1).toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), lista.get(2).toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), lista.get(3).toString(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                   //ArrayList<String> elementos = new ArrayList<String>();
                     elementos.add("R1 [" + i + ", 0]");
                     elementos.add("R1 [" + i + ", 1]");
                     elementos.add("Mesa" + tabla.getFilas());
                     tabla.agregarFilaTabla(elementos);
+                    elementos.clear();
                 }
                 //tabla.eliminarAllTabla();
                 return true;
             case 1:
                 Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
+                //  tabla.eliminarAllTabla();
+                // tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < cont; i++)
                 {
-                    ArrayList<String> elementos = new ArrayList<String>();
+                    //ArrayList<String> elementos = new ArrayList<String>();
                     elementos.add("R2 [" + i + ", 0]");
                     elementos.add("R2 [" + i + ", 1]");
                     elementos.add("Mesa" + i);
                     tabla.agregarFilaTabla(elementos);
+                    elementos.clear();
                 }
 
                 return true;
             case 2:
                 Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
+                //  tabla.eliminarAllTabla();
+                // tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < cont; i++)
                 {
-                    ArrayList<String> elementos = new ArrayList<String>();
+
+                    //ArrayList<String> elementos = new ArrayList<String>();
                     elementos.add("R3 [" + i + ", 0]");
                     elementos.add("R3 [" + i + ", 1]");
                     elementos.add("Mesa" + i);
                     tabla.agregarFilaTabla(elementos);
+                    elementos.clear();
                 }
 
                 return true;
             case 3:
                 Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
+                //  tabla.eliminarAllTabla();
+                // tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < cont; i++)
                 {
-                    ArrayList<String> elementos = new ArrayList<String>();
+                   // ArrayList<String> elementos = new ArrayList<String>();
                     elementos.add("R4 [" + i + ", 0]");
                     elementos.add("R4 [" + i + ", 1]");
                     elementos.add("Mesa" + i);
                     tabla.agregarFilaTabla(elementos);
+                    elementos.clear();
                 }
 
                 return true;
             case 4:
                 Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
+                //  tabla.eliminarAllTabla();
+                // tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < cont; i++)
                 {
-                    ArrayList<String> elementos = new ArrayList<String>();
+                    //ArrayList<String> elementos = new ArrayList<String>();
                     elementos.add("R5 [" + i + ", 0]");
                     elementos.add("R5 [" + i + ", 1]");
                     elementos.add("Mesa" + i);
                     tabla.agregarFilaTabla(elementos);
+                    elementos.clear();
                 }
                 return true;
+            case 5:
+                Toast.makeText(getApplicationContext(), "6", Toast.LENGTH_SHORT).show();
+                //  tabla.eliminarAllTabla();
+                // tabla.agregarCabecera(R.array.cabecera_game_list);
+                for(int i = 0; i < cont; i++)
+                {
+                   // ArrayList<String> elementos = new ArrayList<String>();
+                    elementos.add("R6 [" + i + ", 0]");
+                    elementos.add("R6 [" + i + ", 1]");
+                    elementos.add("Mesa" + i);
+                    tabla.agregarFilaTabla(elementos);
+                    elementos.clear();
+                }
+
+                return true;
         }
+       // elementos.clear();
         return super.onOptionsItemSelected(item);
     }
 

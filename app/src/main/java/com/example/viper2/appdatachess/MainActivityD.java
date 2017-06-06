@@ -86,16 +86,23 @@ public class MainActivityD extends AppCompatActivity
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     lista.add(userSnapshot.getValue(FData.class));
                 }
+                /*
                 if (dataSnapshot.child(String.valueOf(4)).exists()){
                     FData usera = dataSnapshot.child(String.valueOf(4)).getValue(FData.class);
                     Log.i("Prueba",dataSnapshot.toString());
-
+                    Log.i("numero de p",String.valueOf(lista.size()));
                     Toast.makeText(getApplicationContext(),usera.getNombre(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), usera.getCorreo(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), usera.getElo(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), usera.getClub(), Toast.LENGTH_SHORT).show();
                 }
+                */
                 /*
+                Toast.makeText(getApplicationContext(), lista.get(0).getNombre(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), lista.get(1).getCorreo(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), lista.get(1).getElo(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), lista.get(1).getClub(), Toast.LENGTH_SHORT).show();
+
 
                */
             }

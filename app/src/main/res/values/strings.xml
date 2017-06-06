@@ -85,5 +85,14 @@
     <string name="Mesa5">Mesa 5</string>
     <string name="Mesa6">Mesa 6</string>
     <string name="Actualizar">ACTUALIZAR</string>
+    <string-array name="mesas_array">
+        <item>mesa_1</item>
+        <item>mesa_2</item>
+        <item>mesa_3</item>
+        <item>mesa_4</item>
+        <item>mesa_5</item>
+        <item>mesa_6</item>
+    </string-array>
+
 
 </resources>
