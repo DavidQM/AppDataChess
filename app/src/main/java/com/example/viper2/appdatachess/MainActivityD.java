@@ -47,7 +47,7 @@ public class MainActivityD extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        /*
         if (AccessToken.getCurrentAccessToken() == null) {
             goMainActivity();
         }
@@ -55,12 +55,12 @@ public class MainActivityD extends AppCompatActivity
 
         /* prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor*/
-
+        /*
         Bundle box =getIntent().getExtras();
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
-
+*/
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
          /*

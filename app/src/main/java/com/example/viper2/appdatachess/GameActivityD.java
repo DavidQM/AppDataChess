@@ -44,7 +44,7 @@ public class GameActivityD extends AppCompatActivity
         setContentView(R.layout.activity_game_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        /*
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
 
@@ -52,7 +52,7 @@ public class GameActivityD extends AppCompatActivity
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
-
+        */
         //firebase gameactivity
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         rRef= database.getReference("Torneo").child("Rondas");//.child(String.valueOf(1));
@@ -64,9 +64,9 @@ public class GameActivityD extends AppCompatActivity
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                    lista.add(userSnapshot.getValue(String.class));
                 }
+                Log.i("cont = ",String.valueOf(lista.size()));
             }
-
-            @Override
+                        @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
