@@ -30,54 +30,56 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:src="@drawable/peon_min"/>
-           <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="username"
-               android:layout_margin="5dp"
-                android:id="@+id/eUsername"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="password"
-                android:inputType="textPassword"
-                android:layout_margin="5dp"
-                android:id="@+id/ePassword"/>
-            <GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alignmentMode="alignMargins"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:columnCount="2"
-                android:rowCount="1">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Iniciar"
-                    android:textSize="20dp"
-                    android:id="@+id/bIniciar"/>
-                <Spinner
-                    android:id="@+id/spinner"
-                    style="@style/mySpinnerItemStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    />
-            </GridLayout>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Registrarse"
-                android:textSize="10dp"
-                android:layout_margin="15dp"
-                android:id="@+id/bRegistro"/>
-        </GridLayout>
-    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+            <Spinner
+                android:id="@+id/spinner"
+                style="@style/mySpinnerItemStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
+
+            <!-- <GridLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:alignmentMode="alignMargins"
+                 android:layout_gravity="center"
+                 android:layout_margin="5dp"
+                 android:columnCount="2"
+                 android:rowCount="1">
+                 <Button
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:text="Iniciar"
+                     android:textSize="20dp"
+                     android:id="@+id/bIniciar"/>
+
+             </GridLayout>
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:text="Registrarse"
+                 android:textSize="10dp"
+                 android:layout_margin="15dp"
+                 android:id="@+id/bRegistro"/>-->
+         </GridLayout>
+     </LinearLayout>
+
+ </android.support.constraint.ConstraintLayout>
