@@ -1,4 +1,5 @@
 <resources>
+    <string name="facebook_app_id">1467439823294276</string>
     <string name="app_name">DataChess</string>
     <string name="contraseña">Contraseña</string>
     <string name="repetircontraseña">Repetir Contraseña</string>

@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +31,8 @@ public class MainActivityD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Intent intent;
-    SharedPreferences prefs;//nombre de las preferencias
-    SharedPreferences.Editor editor;
+   // SharedPreferences prefs;//nombre de las preferencias
+    //SharedPreferences.Editor editor;
     String username,correo,usuario,TAG;
 
     DatabaseReference myRef;
@@ -44,8 +45,14 @@ public class MainActivityD extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
-        editor = prefs.edit();//traemos el editor
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            goMainActivity();
+        }
+
+
+        /* prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
+        editor = prefs.edit();//traemos el editor*/
 
         Bundle box =getIntent().getExtras();
         username = String.valueOf(box.getString("username"));
@@ -125,6 +132,11 @@ public class MainActivityD extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void goMainActivity() {
+        Intent intent = new Intent(MainActivityD.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -241,8 +253,8 @@ public class MainActivityD extends AppCompatActivity
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
-                editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
-                editor.commit();//practica 5
+                //editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
+                //editor.commit();//practica 5
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
