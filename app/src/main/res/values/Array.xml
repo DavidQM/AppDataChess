@@ -5,4 +5,11 @@
         <item>Espectador</item>
         <item>Juez</item>
     </string-array>
+    <string-array name="rondas">
+        <item>Uno</item>
+        <item>Dos</item>
+        <item>Tres</item>
+        <item>Cuatro</item>
+        <item>Cinco</item>
+    </string-array>
 </resources>

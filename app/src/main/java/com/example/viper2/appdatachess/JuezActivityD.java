@@ -14,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -29,6 +32,8 @@ public class JuezActivityD extends AppCompatActivity
     SharedPreferences prefs;//nombre de las preferencias
     SharedPreferences.Editor editor;
     String username,correo,usuario;
+
+    Spinner sRondas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +54,10 @@ public class JuezActivityD extends AppCompatActivity
         //prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         //editor = prefs.edit();//traemos el editor
 
-        Bundle box =getIntent().getExtras();
+        Bundle box = getIntent().getExtras();
         //username = String.valueOf(box.getString("username"));
         //correo= String.valueOf(box.getString("correo"));
-        usuario= String.valueOf(box.getString("usuario"));
+        usuario = String.valueOf(box.getString("usuario"));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -62,6 +67,42 @@ public class JuezActivityD extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        sRondas = (Spinner) findViewById(R.id.spinner);
+
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,R.array.opciones);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.rondas, R.layout.spinner_item);
+        sRondas.setAdapter(adapter);
+
+        sRondas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+
+                switch (i){
+                    case 0:
+                        Toast.makeText(getApplicationContext(), "Ronda 1", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "Ronda 2", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "Ronda 3", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Ronda 4", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(), "Ronda 5", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
