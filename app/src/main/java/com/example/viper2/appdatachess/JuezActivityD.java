@@ -22,6 +22,14 @@ import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.viper2.appdatachess.R.string.correo;
 import static com.example.viper2.appdatachess.R.string.username;
@@ -34,6 +42,8 @@ public class JuezActivityD extends AppCompatActivity
     SharedPreferences.Editor editor;
     String username,correo,usuario;
     EditText eRb1,eRb2,eRb3,eRn1,eRn2,eRn3;
+
+    DatabaseReference rRef;
 
     Spinner sRondas;
 
@@ -87,7 +97,7 @@ public class JuezActivityD extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
 
-                switch (i){
+                switch (i) {
                     case 0:
                         Toast.makeText(getApplicationContext(), "Ronda 1", Toast.LENGTH_SHORT).show();
                         break;
@@ -105,6 +115,62 @@ public class JuezActivityD extends AppCompatActivity
                         break;
                 }
 
+                int resut1=0,resut2=0,resut3=0,var1b=0,var1n=0,var2b,var2n,var3b,var3n;
+
+                var1b=Integer.parseInt(eRb1.getText().toString());
+                var1n=Integer.parseInt(eRn1.getText().toString());
+                var2b=Integer.parseInt(eRb2.getText().toString());
+                var2n=Integer.parseInt(eRb2.getText().toString());
+                var3b=Integer.parseInt(eRb3.getText().toString());
+                var3n=Integer.parseInt(eRb3.getText().toString());
+                /*
+                if(eRb1.getText().toString().equals("") ||eRn1.getText().toString().equals("") ||eRb2.getText().toString().equals("") ||eRn2.getText().toString().equals("") ||eRb3.getText().toString().equals("") ||eRn3.getText().toString().equals("") )
+                {Toast.makeText(getApplicationContext(), "Alguna de las casillas vacia", Toast.LENGTH_SHORT).show();}
+                else {
+
+                    if (var1b > var1n) {
+                        resut1 = 1;
+                    }//Gana b
+                    if (var1b < var1n) {
+                        resut1 = 2;
+                    }//Gana n
+                    if (var1b == var1n) {
+                        resut1 = 3;
+                    }//empate
+
+                    if (var2b > var2n) {
+                        resut2 = 1;
+                    }//Gana b
+                    if (var2b < var2n) {
+                        resut2 = 2;
+                    }//Gana n
+                    if (var2b == var2n) {
+                        resut2 = 3;
+                    }//empate
+
+                    if (var3b > var3n) {
+                        resut3 = 1;
+                    }//Gana b
+                    if (var3b < var3n) {
+                        resut3 = 2;
+                    }//Gana n
+                    if (var3b == var3n) {
+                        resut3 = 3;
+                    }//empate
+
+
+                    Map<String, Object> upDateResult = new HashMap<>();
+                    upDateResult.put("result", resut1);
+                    rRef.child(String.valueOf(id + 1)).child(String.valueOf(1)).updateChildren(upDateResult);
+
+                    upDateResult.put("result", resut2);
+                    rRef.child(String.valueOf(id + 1)).child(String.valueOf(2)).updateChildren(upDateResult);
+
+                    upDateResult.put("result", resut3);
+                    rRef.child(String.valueOf(id + 1)).child(String.valueOf(3)).updateChildren(upDateResult);
+
+                }
+                */
             }
 
             @Override
@@ -228,5 +294,17 @@ public class JuezActivityD extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;*/
+    }
+
+    void DelaySegundos (int seg){
+        int time= seg*1000;
+
+        try {
+
+            Thread.sleep(time);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
