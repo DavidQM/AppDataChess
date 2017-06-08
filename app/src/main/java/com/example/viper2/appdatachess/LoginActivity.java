@@ -120,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
             goMainActivityD();
         }
 
-
         loginbutton = (LoginButton) findViewById(R.id.login_button);
         loginbutton.setReadPermissions(Arrays.asList("email"));
 
