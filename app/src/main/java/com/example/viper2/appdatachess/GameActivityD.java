@@ -9,10 +9,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 //import java.security.cert.PKIXRevocationChecker;
@@ -24,7 +35,13 @@ public class GameActivityD extends AppCompatActivity
     SharedPreferences prefs;//nombre de las preferencias
     SharedPreferences.Editor editor;
     String username,correo,usuario;
+
     MenuItem Op1;
+
+    //firebase
+    DatabaseReference pRef,rRef;
+
+    int cont=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +49,7 @@ public class GameActivityD extends AppCompatActivity
         setContentView(R.layout.activity_game_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        /*
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
 
@@ -40,16 +57,20 @@ public class GameActivityD extends AppCompatActivity
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         */
+        //firebase gameactivity
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        pRef=database.getReference("Participante");
+        rRef= database.getReference("Torneo").child("Rondas");//.child(String.valueOf(1));
+        rRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cont= (int) dataSnapshot.getChildrenCount();//numero de mesas dinamico
+                cont=cont/2+1;
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) { } });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,19 +86,6 @@ public class GameActivityD extends AppCompatActivity
         //int i=1;
         //Op1.setTitle("Option1");
         //onOptionsItemSelected(Op1);
-
-        ///empiza tabla
-
-        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
-        tabla.agregarCabecera(R.array.cabecera_game_list);
-        for(int i = 0; i < 12; i++)
-        {
-            ArrayList<String> elementos = new ArrayList<String>();
-            elementos.add("R1 [" + i + ", 0]");
-            elementos.add("R1 [" + i + ", 1]");
-            elementos.add("Mesa" + tabla.getFilas());
-            tabla.agregarFilaTabla(elementos);
-        }
 
     }
 
@@ -103,94 +111,279 @@ public class GameActivityD extends AppCompatActivity
         menu.add(0, 2, 0, "Ronda 3").setShortcut('3', 'c');
         menu.add(0, 3, 0, "Ronda 4").setShortcut('3', 'c');
         menu.add(0, 4, 0, "Ronda 5").setShortcut('4', 's');
+        //menu.add(0, 5, 0, "Ronda 6").setShortcut('4', 's');
+        DelaySegundos(2);
+        onOptionsItemSelected(menu.findItem(0));//seleccionamos por defecto ronda 1
+        //DelaySegundos(2);// se le da tiempo para buscar y descargar de la bd
+        return true;
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        final int id = item.getItemId();
+        final Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
+        final ArrayList<String> elementos = new ArrayList<String>();
+        final ArrayList<GameFData> lista = new ArrayList<GameFData>();
+         /*
+        final ArrayList<FData> lista_2 = new ArrayList<FData>();
+        final String [] prueba= new String[6];
+        final int [] numbers= {'1','2','3','4','5','6'};
+        final String[] box_0 = {""};
+        final String box_1;
+        final String box_2;
+
+        pRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    lista_2.add(userSnapshot.getValue(FData.class));
+                }
+                DelaySegundos(2);// se le da tiempo para buscar y descargar de la bd
+                for(int i = 0; i < cont; i++) {
+                    prueba[i]=String.valueOf(lista_2.get(i).getNombre());
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        */
+        rRef.child(String.valueOf(id+1)).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //ArrayList<GameFData> lista = new ArrayList<GameFData>();
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    lista.add(userSnapshot.getValue(GameFData.class));
+                }
+                DelaySegundos(2);// se le da tiempo para buscar y descargar de la bd
+
+                tabla.eliminarAllTabla();
+                tabla.agregarCabecera(R.array.cabecera_game_list);
+                switch (id) {
+                    case 0:
+                        Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                        //  tabla.eliminarAllTabla();
+                        // tabla.agregarCabecera(R.array.cabecera_game_list);
+                        /*
+                        for(int i = 0; i < cont; i++) {
+                            numbers[i]=Integer.parseInt(lista.get(i).getId());
+                        }
+                        */
+                        for(int i = 0; i < cont; i++) {
+                            //ArrayList<String> elementos = new ArrayList<String>();
+                            //elementos.add(prueba[i].toString());
+                            //int k= Integer.valueOf(lista.get(i).getId());
+                            int m= Integer.parseInt(lista.get(i).getId());
+                            int b= Integer.parseInt(lista.get(i).getId_b());
+                            int n= Integer.parseInt(lista.get(i).getId_n());
+                            /*
+                            int aux =0;
+                                    while(aux != k && aux < k){
+                                        aux++;
+                                        Log.i("aux = ",String.valueOf(aux));
+                                    }
+                              */
+                            //int fin= numbers[k];
+                            //box_0[0] =String.valueOf(prueba[aux]);
+                            //elementos.add(prueba[numbers[Integer.parseInt(lista.get(i).getId())]]);
+                            elementos.add("Jugador " + b );
+                            //elementos.add("R1 [" + numbers[aux] + ", 1]");
+                            elementos.add("Jugador " + n );
+                            elementos.add("Mesa " + m);
+                            tabla.agregarFilaTabla(elementos);
+                            elementos.clear();
+                        }
+                        //tabla.eliminarAllTabla();
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+                        for(int i = 0; i < cont; i++) {
+                            int m= Integer.parseInt(lista.get(i).getId());
+                            int b= Integer.parseInt(lista.get(i).getId_b());
+                            int n= Integer.parseInt(lista.get(i).getId_n());
+
+                            elementos.add("Jugador " + b );
+                            elementos.add("Jugador " + n );
+                            elementos.add("Mesa " + m);
+                            tabla.agregarFilaTabla(elementos);
+                            elementos.clear();
+                        }
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+                        for(int i = 0; i < cont; i++) {
+                            int m= Integer.parseInt(lista.get(i).getId());
+                            int b= Integer.parseInt(lista.get(i).getId_b());
+                            int n= Integer.parseInt(lista.get(i).getId_n());
+
+                            elementos.add("Jugador " + b );
+                            elementos.add("Jugador " + n );
+                            elementos.add("Mesa " + m);
+                            tabla.agregarFilaTabla(elementos);
+                            elementos.clear();
+                        }
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+                        for(int i = 0; i < cont; i++) {
+                            int m= Integer.parseInt(lista.get(i).getId());
+                            int b= Integer.parseInt(lista.get(i).getId_b());
+                            int n= Integer.parseInt(lista.get(i).getId_n());
+
+                            elementos.add("Jugador " + b );
+                            elementos.add("Jugador " + n );
+                            elementos.add("Mesa " + m);
+                            tabla.agregarFilaTabla(elementos);
+                            elementos.clear();
+                        }
+                        break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
+                        for(int i = 0; i < cont; i++) {
+                            int m= Integer.parseInt(lista.get(i).getId());
+                            int b= Integer.parseInt(lista.get(i).getId_b());
+                            int n= Integer.parseInt(lista.get(i).getId_n());
+
+                            elementos.add("Jugador " + b );
+                            elementos.add("Jugador " + n );
+                            elementos.add("Mesa " + m);
+                            tabla.agregarFilaTabla(elementos);
+                            elementos.clear();
+                        }
+                        break;
+                    case 5:
+                        Toast.makeText(getApplicationContext(), "6", Toast.LENGTH_SHORT).show();
+                        for(int i = 0; i < cont; i++) {
+                            int m= Integer.parseInt(lista.get(i).getId());
+                            int b= Integer.parseInt(lista.get(i).getId_b());
+                            int n= Integer.parseInt(lista.get(i).getId_n());
+
+                            elementos.add("Jugador " + b );
+                            elementos.add("Jugador " + n );
+                            elementos.add("Mesa " + m);
+                            tabla.agregarFilaTabla(elementos);
+                            elementos.clear();
+                        }
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+
+        });
+
+        //noinspection SimplifiableIfStatement
+        /*
+         switch (id) {
+            case 0:
+                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                //  tabla.eliminarAllTabla();
+                // tabla.agregarCabecera(R.array.cabecera_game_list);
+
+
+
+        for(int i = 0; i < cont; i++) {
+            //ArrayList<String> elementos = new ArrayList<String>();
+            int leng = prueba.length;
+            box_0.concat(prueba[i].toString());
+            //elementos.add(box_0);
+            elementos.add("R1 [" + leng + ", 0]");
+            elementos.add("R1 [" + i + ", 1]");
+            elementos.add("Mesa" + i);
+            tabla.agregarFilaTabla(elementos);
+            elementos.clear();
+        }
+        //tabla.eliminarAllTabla();
+        return true;
+        case 1:
+        Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+        //  tabla.eliminarAllTabla();
+        // tabla.agregarCabecera(R.array.cabecera_game_list);
+        for(int i = 0; i < cont; i++)
+        {
+            //ArrayList<String> elementos = new ArrayList<String>();
+            elementos.add("R2 [" + i + ", 0]");
+            elementos.add("R2 [" + i + ", 1]");
+            elementos.add("Mesa" + i);
+            tabla.agregarFilaTabla(elementos);
+            elementos.clear();
+        }
+
+        return true;
+        case 2:
+        Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+        //  tabla.eliminarAllTabla();
+        // tabla.agregarCabecera(R.array.cabecera_game_list);
+        for(int i = 0; i < cont; i++)
+        {
+
+            //ArrayList<String> elementos = new ArrayList<String>();
+            elementos.add("R3 [" + i + ", 0]");
+            elementos.add("R3 [" + i + ", 1]");
+            elementos.add("Mesa" + i);
+            tabla.agregarFilaTabla(elementos);
+            elementos.clear();
+        }
+
+        return true;
+        case 3:
+        Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+        //  tabla.eliminarAllTabla();
+        // tabla.agregarCabecera(R.array.cabecera_game_list);
+        for(int i = 0; i < cont; i++)
+        {
+            // ArrayList<String> elementos = new ArrayList<String>();
+            elementos.add("R4 [" + i + ", 0]");
+            elementos.add("R4 [" + i + ", 1]");
+            elementos.add("Mesa" + i);
+            tabla.agregarFilaTabla(elementos);
+            elementos.clear();
+        }
+
+        return true;
+        case 4:
+        Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
+        //  tabla.eliminarAllTabla();
+        // tabla.agregarCabecera(R.array.cabecera_game_list);
+        for(int i = 0; i < cont; i++)
+        {
+            //ArrayList<String> elementos = new ArrayList<String>();
+            elementos.add("R5 [" + i + ", 0]");
+            elementos.add("R5 [" + i + ", 1]");
+            elementos.add("Mesa" + i);
+            tabla.agregarFilaTabla(elementos);
+            elementos.clear();
+        }
+        return true;
+        case 5:
+        Toast.makeText(getApplicationContext(), "6", Toast.LENGTH_SHORT).show();
+        //  tabla.eliminarAllTabla();
+        // tabla.agregarCabecera(R.array.cabecera_game_list);
+        for(int i = 0; i < cont; i++)
+        {
+            // ArrayList<String> elementos = new ArrayList<String>();
+            elementos.add("R6 [" + i + ", 0]");
+            elementos.add("R6 [" + i + ", 1]");
+            elementos.add("Mesa" + i);
+            tabla.agregarFilaTabla(elementos);
+            elementos.clear();
+        }
 
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-       // Toast.makeText(getApplicationContext(),String.valueOf(item), Toast.LENGTH_SHORT).show();
-        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
+           */
 
 
-        //noinspection SimplifiableIfStatement
-        switch (item.getItemId()) {
-            case 0:
-                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
-                {
-                    ArrayList<String> elementos = new ArrayList<String>();
-                    elementos.add("R1 [" + i + ", 0]");
-                    elementos.add("R1 [" + i + ", 1]");
-                    elementos.add("Mesa" + tabla.getFilas());
-                    tabla.agregarFilaTabla(elementos);
-                }
-                //tabla.eliminarAllTabla();
-                return true;
-            case 1:
-                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
-                {
-                    ArrayList<String> elementos = new ArrayList<String>();
-                    elementos.add("R2 [" + i + ", 0]");
-                    elementos.add("R2 [" + i + ", 1]");
-                    elementos.add("Mesa" + i);
-                    tabla.agregarFilaTabla(elementos);
-                }
-
-                return true;
-            case 2:
-                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
-                {
-                    ArrayList<String> elementos = new ArrayList<String>();
-                    elementos.add("R3 [" + i + ", 0]");
-                    elementos.add("R3 [" + i + ", 1]");
-                    elementos.add("Mesa" + i);
-                    tabla.agregarFilaTabla(elementos);
-                }
-
-                return true;
-            case 3:
-                Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
-                {
-                    ArrayList<String> elementos = new ArrayList<String>();
-                    elementos.add("R4 [" + i + ", 0]");
-                    elementos.add("R4 [" + i + ", 1]");
-                    elementos.add("Mesa" + i);
-                    tabla.agregarFilaTabla(elementos);
-                }
-
-                return true;
-            case 4:
-                Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
-                tabla.eliminarAllTabla();
-                tabla.agregarCabecera(R.array.cabecera_game_list);
-                for(int i = 0; i < 12; i++)
-                {
-                    ArrayList<String> elementos = new ArrayList<String>();
-                    elementos.add("R5 [" + i + ", 0]");
-                    elementos.add("R5 [" + i + ", 1]");
-                    elementos.add("Mesa" + i);
-                    tabla.agregarFilaTabla(elementos);
-                }
-                return true;
-        }
+       // elementos.clear();
         return super.onOptionsItemSelected(item);
     }
 
@@ -281,5 +474,17 @@ public class GameActivityD extends AppCompatActivity
         */
         //return true;
 
+    }
+
+    void DelaySegundos (int seg){
+        int time= seg*1000;
+
+        try {
+
+            Thread.sleep(time);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

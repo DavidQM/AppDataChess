@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,12 @@ import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class ListActivityD extends AppCompatActivity
@@ -27,13 +34,19 @@ public class ListActivityD extends AppCompatActivity
     SharedPreferences.Editor editor;
     String username,correo,usuario;
 
+
+    //firebase
+    DatabaseReference pRef,rRef;
+
+    int cont=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        /*
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
 
@@ -41,6 +54,49 @@ public class ListActivityD extends AppCompatActivity
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
+*/
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        pRef=database.getReference("Participante");
+        rRef= database.getReference("Torneo").child("Rondas");//.child(String.valueOf(1));
+
+        final Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
+        //tabla.agregarCabecera(R.array.cabecera_tabla_list);
+
+        pRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cont= (int) dataSnapshot.getChildrenCount();//numero de usuarios dinamico
+               // Log.i("cont = ",String.valueOf(cont));
+               // Log.i("key = ",dataSnapshot.getKey());
+                ArrayList<FData> lista = new ArrayList<FData>();
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    lista.add(userSnapshot.getValue(FData.class));
+                }
+
+                DelaySegundos(2);// se le da tiempo para buscar y descargar de la bd
+
+                ArrayList<String> elementos = new ArrayList<String>();
+                tabla.agregarCabecera(R.array.cabecera_tabla_list);
+                for(int i = 0; i < cont; i++)
+                {
+                    //elementos.add(Integer.toString(i));
+                    elementos.add("Jugador "+lista.get(i).getId());
+                    elementos.add(lista.get(i).getNombre());
+                    elementos.add(lista.get(i).getClub());
+                    elementos.add(lista.get(i).getElo());
+
+                    tabla.agregarFilaTabla(elementos);
+                    elementos.clear();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -62,19 +118,6 @@ public class ListActivityD extends AppCompatActivity
 
         ///empiza tabla
 
-        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla_list));
-        tabla.agregarCabecera(R.array.cabecera_tabla_list);
-        for(int i = 0; i < 16; i++)
-        {
-            ArrayList<String> elementos = new ArrayList<String>();
-            elementos.add(Integer.toString(i));
-            elementos.add("Casilla [" + i + ", 0]");
-            elementos.add("Casilla [" + i + ", 1]");
-           // elementos.add("Casilla [" + i + ", 2]");
-           // elementos.add("Casilla [" + i + ", 3]");
-           // elementos.add("Casilla [" + i + ", 4]");
-            tabla.agregarFilaTabla(elementos);
-        }
     }
 
     @Override
@@ -202,4 +245,16 @@ public class ListActivityD extends AppCompatActivity
         //return true;
 
     }
+    void DelaySegundos (int seg){
+        int time= seg*1000;
+
+        try {
+
+            Thread.sleep(time);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
+

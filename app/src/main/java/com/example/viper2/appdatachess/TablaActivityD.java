@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,12 @@ import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class TablaActivityD extends AppCompatActivity
@@ -27,13 +34,20 @@ public class TablaActivityD extends AppCompatActivity
     SharedPreferences.Editor editor;
     String username,correo,usuario;
 
+
+    //firebase
+    DatabaseReference pRef,rRef,tRef;
+
+    int cont=0;
+    int p=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabla_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        /*
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
 
@@ -41,6 +55,329 @@ public class TablaActivityD extends AppCompatActivity
         username = String.valueOf(box.getString("username"));
         correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
+        */
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        pRef=database.getReference("Participante");
+        rRef= database.getReference("Torneo").child("Rondas");//.child(String.valueOf(1));
+        tRef= database.getReference("Torneo").child("Puntos");//
+        final  ArrayList<FData> lista_1 = new ArrayList<FData>();
+        final ArrayList<PData> lista_2 = new ArrayList<PData>();
+        final ArrayList<GameFData> lista_3 = new ArrayList<GameFData>();
+        final Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla));
+        final Double [] box_1= new Double[6];
+        final Double [] box_2= new Double[6];
+        final Double [] box_3= new Double[6];
+        final Double [] box_4= new Double[6];
+        final Double [] box_5= new Double[6];
+        final Double [] box_6= new Double[6];
+
+        //tabla.agregarCabecera(R.array.cabecera_tabla_list);
+
+        pRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cont= (int) dataSnapshot.getChildrenCount();//numero de usuarios dinamico
+                // Log.i("cont = ",String.valueOf(cont));
+                // Log.i("key = ",dataSnapshot.getKey());
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    lista_1.add(userSnapshot.getValue(FData.class));
+                }
+                DelaySegundos(1);// se le da tiempo para buscar y descargar de la bd
+
+                tRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                            lista_2.add(userSnapshot.getValue(PData.class));
+                        }
+                        //aqui voy
+                        /*
+                        for(p = 0; p < cont-2; p++) {
+                            rRef.child(String.valueOf(p+1)).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                                        lista_3.add(userSnapshot.getValue(GameFData.class));
+                                    }
+                                    */
+                                    DelaySegundos(1);// se le da tiempo para buscar y descargar de la bd
+
+                                    tabla.agregarCabecera(R.array.cabecera_tabla);
+
+                                    for(int i = 0; i < cont; i++)
+                                    {
+                                        ArrayList<String> elementos = new ArrayList<String>();
+                                        elementos.add("Jugador "+ lista_2.get(i).getId());
+                                        //elementos.add(lista_1.get(Integer.parseInt(lista_3.get(i).getId())).getNombre());
+                                        switch (Integer.parseInt(lista_2.get(i).getId()))
+                                        {
+                                            case 1:
+                                                elementos.add(lista_1.get(0).getNombre());
+                                                elementos.add(lista_1.get(0).getClub());
+                                                break;
+                                            case 2:
+                                                elementos.add(lista_1.get(1).getNombre());
+                                                elementos.add(lista_1.get(1).getClub());
+                                                break;
+                                            case 3:
+                                                elementos.add(lista_1.get(2).getNombre());
+                                                elementos.add(lista_1.get(2).getClub());
+                                                break;
+                                            case 4:
+                                                elementos.add(lista_1.get(3).getNombre());
+                                                elementos.add(lista_1.get(3).getClub());
+                                                break;
+                                            case 5:
+                                                elementos.add(lista_1.get(4).getNombre());
+                                                elementos.add(lista_1.get(4).getClub());
+                                                break;
+                                            case 6:
+                                                elementos.add(lista_1.get(5).getNombre());
+                                                elementos.add(lista_1.get(5).getClub());
+                                                break;
+
+                                        }
+                                        /*
+                                        for(int j = 0; j < cont/2; j++) {
+
+                                            switch (Integer.parseInt(lista_3.get(j).getResult()))
+                                            {
+                                                case 1://gana blancas
+                                                    //lista_3.get(j).getId_n();
+                                                    switch (Integer.parseInt(lista_3.get(j).getId_b())){
+                                                        case 1:
+                                                            box_1[p]=1.0;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=1.0;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=1.0;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=1.0;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=1.0;
+                                                            break;
+
+                                                    }
+                                                    switch (Integer.parseInt(lista_3.get(p).getId_n())){
+                                                        case 1:
+                                                            box_1[p]=0.0;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=0.0;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=0.0;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=0.0;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=0.0;
+                                                            break;
+
+                                                    }
+
+                                                    break;
+                                                case 2://gana negras
+                                                    switch (Integer.parseInt(lista_3.get(j).getId_n())){
+                                                        case 1:
+                                                            box_1[p]=1.0;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=1.0;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=1.0;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=1.0;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=1.0;
+                                                            break;
+
+                                                    }
+                                                    switch (Integer.parseInt(lista_3.get(j).getId_b())){
+                                                        case 1:
+                                                            box_1[p]=0.0;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=0.0;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=0.0;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=0.0;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=0.0;
+                                                            break;
+
+                                                    }
+                                                    break;
+                                                case 3://empate
+                                                    switch (Integer.parseInt(lista_3.get(j).getId_n())){
+                                                        case 1:
+                                                            box_1[p]=0.5;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=0.5;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=0.5;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=0.5;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=0.5;
+                                                            break;
+                                                    }
+                                                    switch (Integer.parseInt(lista_3.get(j).getId_b())){
+                                                        case 1:
+                                                            box_1[p]=0.5;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=0.5;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=0.5;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=0.5;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=0.5;
+                                                            break;
+                                                    }
+                                                    break;
+                                                case 0://no se ha jugado
+                                                    switch (Integer.parseInt(lista_3.get(j).getId_n())){
+                                                        case 1:
+                                                            box_1[p]=0.0;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=0.0;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=0.0;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=0.0;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=0.0;
+                                                            break;
+                                                    }
+                                                    switch (Integer.parseInt(lista_3.get(j).getId_b())){
+                                                        case 1:
+                                                            box_1[p]=0.0;
+                                                            break;
+                                                        case 2:
+                                                            box_2[p]=0.0;
+                                                            break;
+                                                        case 3:
+                                                            box_3[p]=0.0;
+                                                            break;
+                                                        case 4:
+                                                            box_4[p]=0.0;
+                                                            break;
+                                                        case 5:
+                                                            box_5[p]=0.0;
+                                                            break;
+                                                    }
+                                                    break;
+                                            }//fin sw grande
+                                        }
+                                        Log.i("contador=", String.valueOf(cont));
+                                        Log.i("p =", String.valueOf(p));
+
+                                        switch (i){
+                                            case 0:
+                                                elementos.add(String.valueOf(box_1[0]));
+                                                elementos.add(String.valueOf(box_1[1]));
+                                                elementos.add(String.valueOf(box_1[2]));
+                                                elementos.add(String.valueOf(box_1[3]));
+                                                elementos.add(String.valueOf(box_1[4]));
+                                                elementos.add(String.valueOf(box_1[4]));
+                                                break;
+                                            case 1:
+                                                elementos.add(String.valueOf(box_2[0]));
+                                                elementos.add(String.valueOf(box_2[1]));
+                                                elementos.add(String.valueOf(box_2[2]));
+                                                elementos.add(String.valueOf(box_2[3]));
+                                                elementos.add(String.valueOf(box_2[4]));
+                                                elementos.add(String.valueOf(box_2[4]));
+                                                break;
+                                            case 2:
+                                                elementos.add(String.valueOf(box_3[0]));
+                                                elementos.add(String.valueOf(box_3[1]));
+                                                elementos.add(String.valueOf(box_3[2]));
+                                                elementos.add(String.valueOf(box_3[3]));
+                                                elementos.add(String.valueOf(box_3[4]));
+                                                elementos.add(String.valueOf(box_3[4]));
+                                                break;
+                                            case 3:
+                                                elementos.add(String.valueOf(box_4[0]));
+                                                elementos.add(String.valueOf(box_4[1]));
+                                                elementos.add(String.valueOf(box_4[2]));
+                                                elementos.add(String.valueOf(box_4[3]));
+                                                elementos.add(String.valueOf(box_4[4]));
+                                                elementos.add(String.valueOf(box_4[4]));
+                                                break;
+                                            case 4:
+                                                elementos.add(String.valueOf(box_5[0]));
+                                                elementos.add(String.valueOf(box_5[1]));
+                                                elementos.add(String.valueOf(box_5[2]));
+                                                elementos.add(String.valueOf(box_5[3]));
+                                                elementos.add(String.valueOf(box_5[4]));
+                                                elementos.add(String.valueOf(box_5[4]));
+                                                break;
+                                        }
+                                        */
+                                        elementos.add("R1 [" + i + ", 1]");
+                                        elementos.add("R2 [" + i + ", 2]");
+                                        elementos.add("R3 [" + i + ", 3]");
+                                        elementos.add("R4 [" + i + ", 4]");
+                                        elementos.add("R5 [" + i + ", 5]");
+                                        elementos.add("R6 [" + i + ", 6]");
+
+                                        tabla.agregarFilaTabla(elementos);
+                                    }
+                                /*
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+
+                            });
+
+                        }
+                        */
+                       }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +398,7 @@ public class TablaActivityD extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         ///empiza tabla
-
+        /*
         Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla));
         tabla.agregarCabecera(R.array.cabecera_tabla);
         for(int i = 0; i < 16; i++)
@@ -75,6 +412,7 @@ public class TablaActivityD extends AppCompatActivity
             elementos.add("Casilla [" + i + ", 4]");
             tabla.agregarFilaTabla(elementos);
         }
+        */
     }
 
     @Override
@@ -204,5 +542,15 @@ public class TablaActivityD extends AppCompatActivity
         //return true;
     }
 
+    void DelaySegundos (int seg){
+        int time= seg*1000;
 
+        try {
+
+            Thread.sleep(time);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
