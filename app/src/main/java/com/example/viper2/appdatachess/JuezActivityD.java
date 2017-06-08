@@ -114,7 +114,7 @@ public class JuezActivityD extends AppCompatActivity
                         Toast.makeText(getApplicationContext(), "Ronda 5", Toast.LENGTH_SHORT).show();
                         break;
                 }
-
+                /*
                 int resut1=0,resut2=0,resut3=0,var1b=0,var1n=0,var2b,var2n,var3b,var3n;
 
                 var1b=Integer.parseInt(eRb1.getText().toString());
