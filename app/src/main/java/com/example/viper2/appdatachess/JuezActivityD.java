@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class JuezActivityD extends AppCompatActivity
     SharedPreferences prefs;//nombre de las preferencias
     SharedPreferences.Editor editor;
     String username,correo,usuario;
+    EditText eRb1,eRb2,eRb3,eRn1,eRn2,eRn3;
 
     Spinner sRondas;
 
@@ -41,6 +43,13 @@ public class JuezActivityD extends AppCompatActivity
         setContentView(R.layout.activity_juez_d);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        eRb1 = (EditText) findViewById(R.id.eRb1);
+        eRb2 = (EditText) findViewById(R.id.eRb2);
+        eRb3 = (EditText) findViewById(R.id.eRb3);
+        eRn1 = (EditText) findViewById(R.id.eRn1);
+        eRn2 = (EditText) findViewById(R.id.eRn2);
+        eRn3 = (EditText) findViewById(R.id.eRn3);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
