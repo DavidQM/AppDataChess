@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //EditText eUsername,ePassword;
     //Button bIniciar,bRegistro;
-    String username="",correo="",usuario;
+    String username,correo,usuario="uno";
     Spinner sOpciones;
     Intent intent;//para abirir nuevas actividades
 
@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -105,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    //if(user.getEmail() !=null){ goMainActivityD();}
                     goMainActivityD();
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -117,7 +119,8 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         if (AccessToken.getCurrentAccessToken() != null){
-            goMainActivityD();
+            //goMainActivityD();
+            //Log.i("token",String.valueOf("asda"));
         }
 
         loginbutton = (LoginButton) findViewById(R.id.login_button);
