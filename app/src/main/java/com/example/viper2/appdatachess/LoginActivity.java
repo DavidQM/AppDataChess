@@ -186,13 +186,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (i==0){
                     usuario ="uno";
-                    Toast.makeText(getApplicationContext(), "Eres jugador", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Eres Participante", Toast.LENGTH_SHORT).show();
                 }if(i==1){
                     usuario ="dos";
-                    Toast.makeText(getApplicationContext(), "Eres espectador", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Eres Espectador", Toast.LENGTH_SHORT).show();
                 }if(i==2){
                     usuario ="tres";
-                    Toast.makeText(getApplicationContext(), "Eres juez", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Eres Juez", Toast.LENGTH_SHORT).show();
                 }
 
             }

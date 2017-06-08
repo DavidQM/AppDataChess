@@ -143,6 +143,7 @@ public class MainActivityD extends AppCompatActivity
                 }
             });
         }
+
         if(usuario.equals("tres")) {
             jRef = database.getReference("Juez");
             // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
