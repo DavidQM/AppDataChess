@@ -104,8 +104,6 @@ public class JuezActivityD extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.nav_main:
                 Intent intent = new Intent(JuezActivityD.this, MainActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
                 intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
@@ -113,8 +111,6 @@ public class JuezActivityD extends AppCompatActivity
             case R.id.nav_game:
 
                 intent = new Intent (JuezActivityD.this, GameActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
                 intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
@@ -125,8 +121,6 @@ public class JuezActivityD extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
                 }else {
                     intent = new Intent(JuezActivityD.this, TablaActivityD.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("correo", correo);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
@@ -135,8 +129,6 @@ public class JuezActivityD extends AppCompatActivity
             case R.id.nav_list:
                 if (usuario=="uno") {
                     intent = new Intent(JuezActivityD.this, ListActivityD.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("correo", correo);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
@@ -147,8 +139,6 @@ public class JuezActivityD extends AppCompatActivity
             case R.id.nav_juez:
                 if (usuario=="tres") {
                     intent = new Intent(JuezActivityD.this, JuezActivityD.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("correo", correo);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();

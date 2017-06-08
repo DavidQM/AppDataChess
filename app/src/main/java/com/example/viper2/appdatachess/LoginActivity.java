@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //EditText eUsername,ePassword;
     //Button bIniciar,bRegistro;
-    String username="",correo="",usuario="uno";
+    String username="",correo="",usuario;
     Spinner sOpciones;
     Intent intent;//para abirir nuevas actividades
 
