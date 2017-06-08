@@ -151,6 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         /*prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor
         //inicializamos
