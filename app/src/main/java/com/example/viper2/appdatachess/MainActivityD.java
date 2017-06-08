@@ -40,7 +40,7 @@ public class MainActivityD extends AppCompatActivity
     //SharedPreferences.Editor editor;
     String username,correo,usuario,TAG;
 
-    DatabaseReference myRef,pRef;
+    DatabaseReference jRef,pRef;
     FData user;
 
     @Override
@@ -63,6 +63,7 @@ public class MainActivityD extends AppCompatActivity
         //username = String.valueOf(box.getString("username"));
         //correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
+
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -91,25 +92,59 @@ public class MainActivityD extends AppCompatActivity
             }
         });
         */
-        /*
+
         pRef= database.getReference("Participante");
        // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
         pRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<FData> lista = new ArrayList<FData>();
+                ArrayList<FData> lista_1 = new ArrayList<FData>();
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
-                    lista.add(userSnapshot.getValue(FData.class));
+                    lista_1.add(userSnapshot.getValue(FData.class));
                 }
+                /*
                 if (dataSnapshot.child(String.valueOf(4)).exists()){
                     FData usera = dataSnapshot.child(String.valueOf(4)).getValue(FData.class);
-                    Log.i("Prueba",dataSnapshot.toString());
+                    //Log.i("Prueba",dataSnapshot.toString());
 
-                    Toast.makeText(getApplicationContext(),usera.getNombre(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), usera.getCorreo(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), usera.getElo(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), usera.getClub(), Toast.LENGTH_SHORT).show();
+
                 }
+
+                */
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        jRef= database.getReference("Participante");
+        // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
+        jRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<JData> lista_2 = new ArrayList<JData>();
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    lista_2.add(userSnapshot.getValue(JData.class));
+                }
+                /*
+                if (dataSnapshot.child(String.valueOf(1)).exists()){
+                    JData juez = dataSnapshot.child(String.valueOf(1)).getValue(JData.class);
+                    //Log.i("Prueba",dataSnapshot.toString());
+
+                    Toast.makeText(getApplicationContext(), juez.getCorreo(), Toast.LENGTH_SHORT).show();
+
+                }
+
+                LoginManager.getInstance().logOut();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivityD.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
+                finish();
+                */
 
             }
 
@@ -118,7 +153,7 @@ public class MainActivityD extends AppCompatActivity
 
             }
         });
-        */
+
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
