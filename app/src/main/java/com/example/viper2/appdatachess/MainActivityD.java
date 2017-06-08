@@ -256,16 +256,12 @@ public class MainActivityD extends AppCompatActivity
             case R.id.nav_main:
                 //Toast.makeText(getApplicationContext(), usuario, Toast.LENGTH_SHORT).show();
                 intent = new Intent (MainActivityD.this, MainActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
                 intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.nav_game:
                 intent = new Intent (MainActivityD.this, GameActivityD.class);
-                intent.putExtra("username", username);
-                intent.putExtra("correo", correo);
                 intent.putExtra("usuario", usuario);
                 startActivity(intent);
                 finish();
@@ -275,8 +271,6 @@ public class MainActivityD extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
                 }else {
                     intent = new Intent(MainActivityD.this, TablaActivityD.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("correo", correo);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
@@ -285,8 +279,6 @@ public class MainActivityD extends AppCompatActivity
             case R.id.nav_list:
                 if (Objects.equals(usuario, "uno")) {
                     intent = new Intent(MainActivityD.this, ListActivityD.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("correo", correo);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
@@ -297,8 +289,6 @@ public class MainActivityD extends AppCompatActivity
             case R.id.nav_juez:
                 if (Objects.equals(usuario, "tres")) {
                     intent = new Intent(MainActivityD.this, JuezActivityD.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("correo", correo);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);
                     finish();
