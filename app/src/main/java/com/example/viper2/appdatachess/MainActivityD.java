@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
@@ -48,22 +51,26 @@ public class MainActivityD extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        if (AccessToken.getCurrentAccessToken() == null) {
+       /* if (AccessToken.getCurrentAccessToken() == null) {
             goMainActivity();
-        }
+        }*/
 
 
         /* prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
         editor = prefs.edit();//traemos el editor*/
 
         Bundle box =getIntent().getExtras();
-        username = String.valueOf(box.getString("username"));
-        correo= String.valueOf(box.getString("correo"));
+        //username = String.valueOf(box.getString("username"));
+        //correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-         /*
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        username =  user.getDisplayName();
+        correo = user.getEmail();
+
+        /*
          user = new FData(String.valueOf(4),"nombre","asdas@asda","abc123","Marinillos","12323");
          myRef = database.getReference("Participante").child(String.valueOf(4));
          myRef.setValue(user);
@@ -132,10 +139,10 @@ public class MainActivityD extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void goMainActivity() {
+   /* private void goMainActivity() {
         Intent intent = new Intent(MainActivityD.this, LoginActivity.class);
         startActivity(intent);
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
@@ -247,10 +254,17 @@ public class MainActivityD extends AppCompatActivity
                 return true;
 
             case R.id.nav_logout:
-                intent = new Intent (MainActivityD.this, LoginActivity.class);
+                /*intent = new Intent (MainActivityD.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
+                finish();*/
+                LoginManager.getInstance().logOut();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivityD.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
+
                 //editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
                 //editor.commit();//practica 5
                 return true;

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "546234242380-biio0got64p8fc90q1tfuvjlg0rimven.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.viper2.appdatachess",
+            "certificate_hash": "ab58c2f9f295d302e80c148150f068a5f11085b1"
+          }
+        },
+        {
           "client_id": "546234242380-rovps9014h7ml2ugav9097nqfubb07ql.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
