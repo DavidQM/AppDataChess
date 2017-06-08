@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (AccessToken.getCurrentAccessToken() != null){
             //goMainActivityD();
-            Log.i("token",String.valueOf("asda"));
+            //Log.i("token",String.valueOf("asda"));
         }
 
         loginbutton = (LoginButton) findViewById(R.id.login_button);
