@@ -39,7 +39,7 @@ public class MainActivityD extends AppCompatActivity
     Intent intent;
    // SharedPreferences prefs;//nombre de las preferencias
     //SharedPreferences.Editor editor;
-    String username,correo,usuario,TAG;
+    String username,correo,usuario,TAG,email;
 
     DatabaseReference jRef,pRef;
     FData user;
@@ -49,7 +49,7 @@ public class MainActivityD extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_d);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -63,13 +63,13 @@ public class MainActivityD extends AppCompatActivity
 
         Bundle box =getIntent().getExtras();
         //username = String.valueOf(box.getString("username"));
-        //correo= String.valueOf(box.getString("correo"));
+        //email= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
 
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         username =  user.getDisplayName();
         correo = user.getEmail();
 
@@ -94,7 +94,11 @@ public class MainActivityD extends AppCompatActivity
             }
         });
         */
-        if(usuario.equals("uno")) {
+        /*
+        Log.i("v3=",String.valueOf(user.getEmail()));
+        //Log.i("v4=",String.valueOf(email));
+
+        if(Objects.equals(usuario,"uno")) {
             pRef = database.getReference("Participante");
             // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
             pRef.addValueEventListener(new ValueEventListener() {
@@ -105,36 +109,27 @@ public class MainActivityD extends AppCompatActivity
                         lista_1.add(userSnapshot.getValue(FData.class));
                     }
                     var = (int) dataSnapshot.getChildrenCount();//numero de usuarios dinamico
-
+                    typeU = false;
                     for (int i = 0; i < var; i++) {
-
-                        if (correo.equals(lista_1.get(i).getCorreo())) {
+                        Log.i("v1=",lista_1.get(i).getCorreo());
+                        //Log.i("v2=",String.valueOf(user.getEmail()));
+                        if (Objects.equals(correo,lista_1.get(i).getCorreo())) {
                             typeU = true;
-                        } else {
-                            typeU = false;
+                            Log.i("true",lista_1.get(i).getCorreo());
                         }
-
                     }
-                /*
-                if (dataSnapshot.child(String.valueOf(4)).exists()){
-                    FData usera = dataSnapshot.child(String.valueOf(4)).getValue(FData.class);
-                    //Log.i("Prueba",dataSnapshot.toString());
 
-                    Toast.makeText(getApplicationContext(), usera.getCorreo(), Toast.LENGTH_SHORT).show();
-
-                }
-                */
-
-                    if (typeU) {
+                if (typeU) {
                         Toast.makeText(getApplicationContext(), "Si eres Participante", Toast.LENGTH_SHORT).show();
                     } else {
                         LoginManager.getInstance().logOut();
                         FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(MainActivityD.this, LoginActivity.class);
                         startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "No eres Participante" + usuario, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "No eres Participante", Toast.LENGTH_SHORT).show();
                         finish();
                     }
+
                 }
 
                 @Override
@@ -166,16 +161,6 @@ public class MainActivityD extends AppCompatActivity
                         }
 
                     }
-
-                /*
-                if (dataSnapshot.child(String.valueOf(1)).exists()){
-                    JData juez = dataSnapshot.child(String.valueOf(1)).getValue(JData.class);
-                    //Log.i("Prueba",dataSnapshot.toString());
-
-                    Toast.makeText(getApplicationContext(), juez.getCorreo(), Toast.LENGTH_SHORT).show();
-
-                }
-                */
                     if (typeU) {
                         Toast.makeText(getApplicationContext(), "Si eres Juez", Toast.LENGTH_SHORT).show();
                     } else {
@@ -196,6 +181,7 @@ public class MainActivityD extends AppCompatActivity
                 }
             });
         }
+        */
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -341,7 +327,6 @@ public class MainActivityD extends AppCompatActivity
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
-
                 //editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
                 //editor.commit();//practica 5
                 return true;
