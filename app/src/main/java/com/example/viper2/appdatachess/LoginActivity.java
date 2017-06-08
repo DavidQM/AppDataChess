@@ -360,6 +360,7 @@ public class LoginActivity extends AppCompatActivity {
         //intent.putExtra("username",username);
         // intent.putExtra("correo",correo);
         startActivity(intent);
+        finish();
 
     }
 

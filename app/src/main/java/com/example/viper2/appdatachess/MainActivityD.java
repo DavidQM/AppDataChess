@@ -41,9 +41,10 @@ public class MainActivityD extends AppCompatActivity
     //SharedPreferences.Editor editor;
     String username,correo,usuario,TAG;
 
-    DatabaseReference myRef,pRef;
+    DatabaseReference jRef,pRef;
     FData user;
-
+    int var;
+    boolean typeU;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +66,10 @@ public class MainActivityD extends AppCompatActivity
         //correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
 
+
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         username =  user.getDisplayName();
         correo = user.getEmail();
 
@@ -92,34 +94,107 @@ public class MainActivityD extends AppCompatActivity
             }
         });
         */
-        /*
-        pRef= database.getReference("Participante");
-       // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
-        pRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<FData> lista = new ArrayList<FData>();
-                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
-                    lista.add(userSnapshot.getValue(FData.class));
-                }
+        if(usuario.equals("uno")) {
+            pRef = database.getReference("Participante");
+            // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
+            pRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    ArrayList<FData> lista_1 = new ArrayList<FData>();
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        lista_1.add(userSnapshot.getValue(FData.class));
+                    }
+                    var = (int) dataSnapshot.getChildrenCount();//numero de usuarios dinamico
+
+                    for (int i = 0; i < var; i++) {
+
+                        if (correo.equals(lista_1.get(i).getCorreo())) {
+                            typeU = true;
+                        } else {
+                            typeU = false;
+                        }
+
+                    }
+                /*
                 if (dataSnapshot.child(String.valueOf(4)).exists()){
                     FData usera = dataSnapshot.child(String.valueOf(4)).getValue(FData.class);
-                    Log.i("Prueba",dataSnapshot.toString());
+                    //Log.i("Prueba",dataSnapshot.toString());
 
-                    Toast.makeText(getApplicationContext(),usera.getNombre(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), usera.getCorreo(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), usera.getElo(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), usera.getClub(), Toast.LENGTH_SHORT).show();
+
+                }
+                */
+
+                    if (typeU) {
+                        Toast.makeText(getApplicationContext(), "Si eres Participante", Toast.LENGTH_SHORT).show();
+                    } else {
+                        LoginManager.getInstance().logOut();
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(MainActivityD.this, LoginActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "No eres Participante" + usuario, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
 
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }
+        if(usuario.equals("tres")) {
+            jRef = database.getReference("Juez");
+            // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
+            jRef.addValueEventListener(new ValueEventListener() {
+                @Override
 
-            }
-        });
-        */
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    ArrayList<JData> lista_2 = new ArrayList<JData>();
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        lista_2.add(userSnapshot.getValue(JData.class));
+                    }
+                    var = (int) dataSnapshot.getChildrenCount();//numero de usuarios dinamico
+
+                    for (int i = 0; i < var; i++) {
+
+                        if (correo.equals(lista_2.get(i).getCorreo())) {
+                            typeU = true;
+                        } else {
+                            typeU = false;
+                        }
+
+                    }
+
+                /*
+                if (dataSnapshot.child(String.valueOf(1)).exists()){
+                    JData juez = dataSnapshot.child(String.valueOf(1)).getValue(JData.class);
+                    //Log.i("Prueba",dataSnapshot.toString());
+
+                    Toast.makeText(getApplicationContext(), juez.getCorreo(), Toast.LENGTH_SHORT).show();
+
+                }
+                */
+                    if (typeU) {
+                        Toast.makeText(getApplicationContext(), "Si eres Juez", Toast.LENGTH_SHORT).show();
+                    } else {
+                        LoginManager.getInstance().logOut();
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(MainActivityD.this, LoginActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "No eres Juez", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
