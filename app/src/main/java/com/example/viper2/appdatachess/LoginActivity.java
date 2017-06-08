@@ -123,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
             //Log.i("token",String.valueOf("asda"));
         }
 
+
         loginbutton = (LoginButton) findViewById(R.id.login_button);
         loginbutton.setReadPermissions(Arrays.asList("email"));
 
