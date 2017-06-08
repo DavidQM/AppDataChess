@@ -278,15 +278,15 @@ public class MainActivityD extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
                 }
                 return true;
-            case R.id.nav_config:
-                /*
+           /*  case R.id.nav_config:
+
                 intent = new Intent (MainActivityD.this, PerfilActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
-                return true;
+
+                return true;*/
 
             case R.id.nav_logout:
                 /*intent = new Intent (MainActivityD.this, LoginActivity.class);
