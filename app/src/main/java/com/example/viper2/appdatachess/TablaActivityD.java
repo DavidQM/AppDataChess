@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -514,23 +516,29 @@ public class TablaActivityD extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
                 }
                 return true;
-            case R.id.nav_config:
-                /*
+           /* case R.id.nav_config:
+
                 intent = new Intent (TablaActivityD.this, PerfilActivityD.class);
                 intent.putExtra("username", username);
                 intent.putExtra("correo", correo);
                 startActivity(intent);
                 finish();
-                */
-                return true;
+
+                return true; */
 
             case R.id.nav_logout:
-                intent = new Intent (TablaActivityD.this, LoginActivity.class);
+                /*intent = new Intent (MainActivityD.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
+                finish();*/
+                LoginManager.getInstance().logOut();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(TablaActivityD.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Sesión cerrada", Toast.LENGTH_SHORT).show();
                 finish();
-                editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
-                editor.commit();//practica 5
+                //editor.putInt("login",-1);//sobre escribimos con -1 (desloggeamos)
+                //editor.commit();//practica 5
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

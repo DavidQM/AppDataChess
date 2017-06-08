@@ -26,10 +26,10 @@
 
     <item android:title="Communicate">
         <menu>
-            <item
+            <!--<item
                 android:id="@+id/nav_config"
                 android:icon="@drawable/ic_menu_config"
-                android:title="Configuración" />
+                android:title="Configuración" /> -->
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_menu_logout"
