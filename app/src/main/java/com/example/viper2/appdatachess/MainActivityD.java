@@ -91,6 +91,7 @@ public class MainActivityD extends AppCompatActivity
             }
         });
         */
+        /*
         pRef= database.getReference("Participante");
        // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
         pRef.addValueEventListener(new ValueEventListener() {
@@ -109,9 +110,7 @@ public class MainActivityD extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), usera.getElo(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), usera.getClub(), Toast.LENGTH_SHORT).show();
                 }
-                /*
 
-               */
             }
 
             @Override
@@ -119,6 +118,7 @@ public class MainActivityD extends AppCompatActivity
 
             }
         });
+        */
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
