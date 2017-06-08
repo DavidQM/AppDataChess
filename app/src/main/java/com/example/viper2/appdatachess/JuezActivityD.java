@@ -46,12 +46,12 @@ public class JuezActivityD extends AppCompatActivity
             }
         });*/
 
-        prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
-        editor = prefs.edit();//traemos el editor
+        //prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
+        //editor = prefs.edit();//traemos el editor
 
         Bundle box =getIntent().getExtras();
-        username = String.valueOf(box.getString("username"));
-        correo= String.valueOf(box.getString("correo"));
+        //username = String.valueOf(box.getString("username"));
+        //correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

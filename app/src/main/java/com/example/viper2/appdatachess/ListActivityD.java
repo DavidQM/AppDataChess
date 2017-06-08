@@ -50,13 +50,13 @@ public class ListActivityD extends AppCompatActivity
         setSupportActionBar(toolbar);
         /*
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
-        editor = prefs.edit();//traemos el editor
+        editor = prefs.edit();//traemos el editor*/
 
         Bundle box =getIntent().getExtras();
-        username = String.valueOf(box.getString("username"));
-        correo= String.valueOf(box.getString("correo"));
+        //username = String.valueOf(box.getString("username"));
+        //correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
-*/
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         pRef=database.getReference("Participante");
         rRef= database.getReference("Torneo").child("Rondas");//.child(String.valueOf(1));
