@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.logging.StreamHandler;
 
 
 public class MainActivityD extends AppCompatActivity
@@ -106,7 +107,6 @@ public class MainActivityD extends AppCompatActivity
                     var = (int) dataSnapshot.getChildrenCount();//numero de usuarios dinamico
 
                     for (int i = 0; i < var; i++) {
-
                         if (correo.equals(lista_1.get(i).getCorreo())) {
                             typeU = true;
                         } else {
@@ -114,15 +114,6 @@ public class MainActivityD extends AppCompatActivity
                         }
 
                     }
-                /*
-                if (dataSnapshot.child(String.valueOf(4)).exists()){
-                    FData usera = dataSnapshot.child(String.valueOf(4)).getValue(FData.class);
-                    //Log.i("Prueba",dataSnapshot.toString());
-
-                    Toast.makeText(getApplicationContext(), usera.getCorreo(), Toast.LENGTH_SHORT).show();
-
-                }
-                */
 
                     if (typeU) {
                         Toast.makeText(getApplicationContext(), "Si eres Participante", Toast.LENGTH_SHORT).show();
@@ -154,27 +145,21 @@ public class MainActivityD extends AppCompatActivity
                         lista_2.add(userSnapshot.getValue(JData.class));
                     }
                     var = (int) dataSnapshot.getChildrenCount();//numero de usuarios dinamico
-
+                    Log.i("var 2", String.valueOf(var));
                     for (int i = 0; i < var; i++) {
+                        //Log.i("get1 ", lista_2.get(i).getCorreo());
 
                         if (correo.equals(lista_2.get(i).getCorreo())) {
+                            // Log.i("get ", lista_2.get(i).getCorreo());
                             typeU = true;
                         } else {
                             typeU = false;
                         }
 
+
                     }
 
-                /*
-                if (dataSnapshot.child(String.valueOf(1)).exists()){
-                    JData juez = dataSnapshot.child(String.valueOf(1)).getValue(JData.class);
-                    //Log.i("Prueba",dataSnapshot.toString());
-
-                    Toast.makeText(getApplicationContext(), juez.getCorreo(), Toast.LENGTH_SHORT).show();
-
-                }
-                */
-                    if (typeU) {
+                   if (typeU) {
                         Toast.makeText(getApplicationContext(), "Si eres Juez", Toast.LENGTH_SHORT).show();
                     } else {
                         LoginManager.getInstance().logOut();
@@ -184,8 +169,6 @@ public class MainActivityD extends AppCompatActivity
                         Toast.makeText(getApplicationContext(), "No eres Juez", Toast.LENGTH_SHORT).show();
                         finish();
                     }
-
-
                 }
 
                 @Override
@@ -283,7 +266,7 @@ public class MainActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_table:
-                if (usuario=="tres"){
+                if (usuario.equals("tres")){
                     Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
                 }else {
                     intent = new Intent(MainActivityD.this, TablaActivityD.class);
@@ -295,7 +278,7 @@ public class MainActivityD extends AppCompatActivity
                 }
                 return true;
             case R.id.nav_list:
-                if (usuario=="uno") {
+                if (usuario.equals("uno")) {
                     intent = new Intent(MainActivityD.this, ListActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
@@ -303,11 +286,12 @@ public class MainActivityD extends AppCompatActivity
                     startActivity(intent);
                     finish();
                 }else{
+                    Log.i("usuario",usuario);
                     Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             case R.id.nav_juez:
-                if (usuario=="tres") {
+                if (usuario.equals("tres")) {
                     intent = new Intent(MainActivityD.this, JuezActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
