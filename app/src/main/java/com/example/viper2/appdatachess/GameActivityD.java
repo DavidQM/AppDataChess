@@ -53,13 +53,13 @@ public class GameActivityD extends AppCompatActivity
         setSupportActionBar(toolbar);
         /*
         prefs = getSharedPreferences("MisPreferencias",MODE_PRIVATE);//traer informacion
-        editor = prefs.edit();//traemos el editor
+        editor = prefs.edit();//traemos el editor*/
 
         Bundle box =getIntent().getExtras();
-        username = String.valueOf(box.getString("username"));
-        correo= String.valueOf(box.getString("correo"));
+        //username = String.valueOf(box.getString("username"));
+        //correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
-        */
+
         //firebase gameactivity
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         pRef=database.getReference("Participante");

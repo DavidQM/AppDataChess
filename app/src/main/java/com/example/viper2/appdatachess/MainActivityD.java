@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class MainActivityD extends AppCompatActivity
@@ -208,7 +209,7 @@ public class MainActivityD extends AppCompatActivity
                 finish();
                 return true;
             case R.id.nav_table:
-                if (usuario=="tres"){
+                if (Objects.equals(usuario, "tres")){
                     Toast.makeText(getApplicationContext(), "Campo no habilitado", Toast.LENGTH_SHORT).show();
                 }else {
                     intent = new Intent(MainActivityD.this, TablaActivityD.class);
@@ -220,7 +221,7 @@ public class MainActivityD extends AppCompatActivity
                 }
                 return true;
             case R.id.nav_list:
-                if (usuario=="uno") {
+                if (Objects.equals(usuario, "uno")) {
                     intent = new Intent(MainActivityD.this, ListActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
@@ -232,7 +233,7 @@ public class MainActivityD extends AppCompatActivity
                 }
                 return true;
             case R.id.nav_juez:
-                if (usuario=="tres") {
+                if (Objects.equals(usuario, "tres")) {
                     intent = new Intent(MainActivityD.this, JuezActivityD.class);
                     intent.putExtra("username", username);
                     intent.putExtra("correo", correo);
