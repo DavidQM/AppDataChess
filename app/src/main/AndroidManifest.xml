@@ -26,20 +26,23 @@
         <activity
             android:name=".TablaActivityD"
             android:label="@string/title_activity_tabla_d"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ListActivityD"
-            android:label="@string/title_activity_list_d"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".GameActivityD"
-            android:label="@string/title_activity_game_d"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ListActivityD"
+            android:label="@string/title_activity_list_d"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+        <activity
+            android:name=".GameActivityD"
+            android:label="@string/title_activity_game_d"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".JuezActivityD"

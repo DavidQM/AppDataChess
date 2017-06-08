@@ -61,14 +61,15 @@ public class MainActivityD extends AppCompatActivity
         correo= String.valueOf(box.getString("correo"));
         usuario= String.valueOf(box.getString("usuario"));
 */
+        /*
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-         /*
+
          user = new FData(String.valueOf(4),"nombre","asdas@asda","abc123","Marinillos","12323");
          myRef = database.getReference("Participante").child(String.valueOf(4));
          myRef.setValue(user);
-         */
-        /*
+
+
         // pruba funcional 05 -06-2017
         pRef= database.getReference("Participante");
         pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
@@ -84,6 +85,7 @@ public class MainActivityD extends AppCompatActivity
             }
         });
         */
+        /*
         pRef= database.getReference("Participante");
        // pRef.child(String.valueOf(4)).addValueEventListener(new ValueEventListener() {
         pRef.addValueEventListener(new ValueEventListener() {
@@ -93,7 +95,7 @@ public class MainActivityD extends AppCompatActivity
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     lista.add(userSnapshot.getValue(FData.class));
                 }
-                /*
+
                 if (dataSnapshot.child(String.valueOf(4)).exists()){
                     FData usera = dataSnapshot.child(String.valueOf(4)).getValue(FData.class);
                     Log.i("Prueba",dataSnapshot.toString());
@@ -103,15 +105,15 @@ public class MainActivityD extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), usera.getElo(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), usera.getClub(), Toast.LENGTH_SHORT).show();
                 }
-                */
-                /*
+
+
                 Toast.makeText(getApplicationContext(), lista.get(0).getNombre(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), lista.get(1).getCorreo(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), lista.get(1).getElo(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), lista.get(1).getClub(), Toast.LENGTH_SHORT).show();
 
 
-               */
+
             }
 
             @Override
@@ -119,6 +121,7 @@ public class MainActivityD extends AppCompatActivity
 
             }
         });
+        */
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
